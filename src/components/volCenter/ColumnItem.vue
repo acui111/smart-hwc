@@ -23,7 +23,7 @@
       :max ="duration" 
       min ="0" 
       step="1" 
-      @input = "changeProcess()" 
+      @input = "changeProcess(id)" 
       :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ processPoint*100/duration +'% 100% no-repeat'}
       "
       />
@@ -48,11 +48,12 @@
 <script type="text/ecmascript-6">
   export default {
     name:'ColumnItem',
-    props:['id','name'],
+    props:['id','name',"value"],
     data(){
       return{
-        processPoint:50,
-        duration:'100', //input range总分段
+        processPoint:this.value,
+        //音量控制范围
+        duration:'100', 
         // 控制静音的显示状态
         muteState:0,
         //控制全音的显示状态
@@ -61,10 +62,13 @@
     },
     methods: {
       //滑动滑块
-      changeProcess(){
+      changeProcess(id){
         var range = this.$refs.processRange;
         this.processPoint = range.value;
         this.judgeState();
+        this.$events.emit('changeVol',{id,vol:this.processPoint});
+        //实时改变每一项的声音
+        console.log(this.processPoint);
       },
       //100%
       vol(){
@@ -88,17 +92,26 @@
       },
       //判断音量按钮显示状态
       judgeState(){
-        if (this.processPoint > 0 ) {
-          this.muteState = 0;
-          this.volState = 0;
-        }else if(this.processPoint == this.duration){
-          console.log('全音了');
+        if(this.processPoint == this.duration){
+          // 全音(100%)
           this.volState = 1;
           this.muteState = 0;
-        }else{
+        }else if(this.processPoint == 0){
+          // 静音(等于0)
           this.volState = 0;
           this.muteState = 1;
+        }else{
+          // (0-100%中间)
+          this.muteState = 0;
+          this.volState = 0;
         }
+      }
+    },
+    mounted(){
+      if (this.value == 100) {
+        this.volState = 1 ;
+      }else if(this.value == 0){
+        this.muteState = 1 ;
       }
     }
   }
@@ -166,7 +179,11 @@
   }
   /*滑块*/
   input[type=range]::-webkit-slider-thumb {
-    margin-top: -8px;
-    transform:rotate(270deg);
+    -webkit-appearance: none;
+    width: 24px;
+    height: 13px;
+    margin-top: -4px;
+    background-image: url(/image/vol.png);
+    background-size: 100% 100%;
   }
 </style>

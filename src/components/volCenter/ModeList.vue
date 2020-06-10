@@ -3,7 +3,7 @@
     <template v-for="(modeItem,index) in modeList">
       <div
         :id="modeItem.id" 
-        @click="selectMode(modeItem.id)"
+        @click="selectMode(modeItem.id,modeItem.name)"
         :class="{active:modeItem.id == isActive}"
         >
         <!-- 默认 -->
@@ -51,7 +51,12 @@
       }
     },
     methods: {
-      selectMode(id){
+      selectMode(id,name){
+        if (id > 1) {
+          this.$events.emit('editButtonShow',{state:1,id,name});
+        }else{
+          this.$events.emit('editButtonShow',{state:0,id,name});
+        }
         this.isActive = id;
       },
     }

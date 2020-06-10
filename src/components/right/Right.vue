@@ -20,5 +20,6 @@
   #right{
     width: 22%;
     height: 100%;
+    overflow: hidden;
   }
 </style>

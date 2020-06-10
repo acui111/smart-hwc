@@ -167,7 +167,11 @@
   }
   /*滑块*/
   input[type=range]::-webkit-slider-thumb {
-    margin-top: -8px;
-    transform:rotate(270deg);
+    -webkit-appearance: none;
+    width:24px;
+    height: 13px;
+    margin-top: -4px;
+    background-image: url(/image/vol.png);
+    background-size: 100% 100%;
   }
 </style>

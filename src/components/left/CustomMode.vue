@@ -6,23 +6,29 @@
         <div
           id="custom-item" 
           @click="selectMode(customItem.id)"
+          @mouseenter="enter(customItem.id)"
+          @mouseleave="leave"
           :class="{active:customItem.id == isActive}"
           >
           <!-- 默认 -->
           <img style="width:73px;height:73px" :src="customItem.id == isActive? Src: src" alt="模式">
           <div class="name">{{customItem.name}}</div>
-          <div class='edit' v-if="customItem.id == isActive">
+          <div class='edit' v-if="customItem.id == EditActive">
 
-            <!-- 默认 -->
+            <!-- 默认编辑 -->
             <img v-if="editState == 0" src="/image/icon_edit.png" alt="编辑预案" @mouseenter="editMouseEnter" @mouseleave="editMouseLeave">
-            <!-- 鼠标移入 -->
+            <!-- 鼠标移入编辑 -->
             <img v-else-if="editState == 1" src="/image/icon_edit_s.png" alt="编辑预案" @mouseenter="editMouseEnter" @mouseleave="editMouseLeave">
 
+            <!-- 默认删除 -->
             <img v-if="delState == 0" src="/image/icon_del.png" alt="删除预案" @mouseenter="delMouseEnter" @mouseleave="delMouseLeave">
+            <!-- 鼠标移入删除 -->
             <img v-else-if="delState == 1" src="/image/icon_del_s.png" alt="删除预案" @mouseenter="delMouseEnter" @mouseleave="delMouseLeave">
-
+            
+            <!-- 默认重命名 -->
             <img v-if="reState == 0" src="/image/icon_re.png" alt="重命名预案" @mouseenter="reMouseEnter" @mouseleave="reMouseLeave">
-            <img v-else-if="reState == 1" src="/image/icon_re_s.png" alt="删除预案" @mouseenter="reMouseEnter" @mouseleave="reMouseLeave">
+            <!-- 鼠标移入重命名 -->
+            <img v-else-if="reState == 1" src="/image/icon_re_s.png" alt="重命名预案" @mouseenter="reMouseEnter" @mouseleave="reMouseLeave">
           </div>
         </div>
       </template>
@@ -62,17 +68,29 @@
             name:'查看更多'
           },
         ],
-        isActive: 0,
         Src:'/image/button01_s.png',
         src:'/image/button01.png',
+        // 是否选中
+        isActive: 0,
+        // 是否显示编辑
+        EditActive:0,
+        // 是否移入编辑
         editState:0,
+        // 是否移入删除
         delState:0,
+        // 是否移入重命名
         reState:0,
       }
     },
     methods: {
       selectMode(id){
         this.isActive = id ;
+      },
+      enter(id){
+        this.EditActive = id ;
+      },
+      leave(){
+        this.EditActive = 0 ;
       },
       // 鼠标移入（编辑）
       editMouseEnter(){
