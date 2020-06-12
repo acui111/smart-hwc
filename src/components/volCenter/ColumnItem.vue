@@ -68,7 +68,7 @@
         this.judgeState();
         this.$events.emit('changeVol',{id,vol:this.processPoint});
         //实时改变每一项的声音
-        console.log(this.processPoint);
+        // console.log(this.processPoint);
       },
       //100%
       vol(){
@@ -108,6 +108,7 @@
       }
     },
     mounted(){
+      // console.log('切换模式',this.value);
       if (this.value == 100) {
         this.volState = 1 ;
       }else if(this.value == 0){

@@ -3,7 +3,7 @@
   <div id="equipments">
     <!-- 前摄像头与空调 -->
     <div class="equipment-header">
-      <img style="width:50px;height:49px" src="/image/envImg/icon1.png" alt="前摄像头">
+      <img style="width:50px;height:49px" src="/image/envImg/icon1.png" alt="前摄像头" @click="switchCamera">
       <div class="air-conditioner">
         <img style="width:36px;height:44px" class="air1" src="/image/envImg/icon2.png" alt="空调1">
         <img style="width:36px;height:44px" src="/image/envImg/icon2.png" alt="空调2">
@@ -11,7 +11,7 @@
     </div>
     <!-- 大屏幕 -->
     <div class="screen">
-      <img class="screen1" src="/image/envImg/icon4.png">
+      <LayoutModeList class="screen1"/>
       <div class="light">
         <img style="width:33px;height:50px" src="/image/envImg/icon5.png" alt="前灯1">
         <img style="width:33px;height:50px" src="/image/envImg/icon6.png" alt="前灯2">
@@ -21,8 +21,17 @@
 </template>
   
 <script type="text/ecmascript-6">
+  import LayoutModeList from './LayoutModeList';
   export default {
-  
+    components:{
+      LayoutModeList
+    },
+    methods: {
+      switchCamera(){
+        this.$editor.camera = _.first(this.$config.ipCameraList);
+        // console.log('摄像头切换指令',this.$editor.camera.commandList);
+      }
+    }
   }
 </script>
   
@@ -58,7 +67,7 @@
     left: 50%;
     top: 50%;
     margin-left: -210px;
-    margin-top: -55px;
+    margin-top: -80px;
   }
   .light{
     width: calc(100% - 80px);

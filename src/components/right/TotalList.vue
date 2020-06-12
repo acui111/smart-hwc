@@ -1,11 +1,12 @@
 <template>
   <!-- 总调音台 -->
   <div id='total-tuning'>
-    <template v-for="(totalItem,index) in totalList" >
+    <template v-for="(totalItem,index) in this.$editor.allVol" >
       <TotalItem
         :key="index"
         :id="totalItem.id"
         :name="totalItem.name"
+        :value="totalItem.value"
       />
     </template>
   </div>
@@ -20,22 +21,10 @@
     },
     data(){
       return{
-        totalList:[
-          {
-            id:1,
-            name:'总音量'
-          },
-          {
-            id:2,
-            name:'左声道'
-          },
-          {
-            id:1,
-            name:'右声道'
-          }
-        ]
+  
       }
     },
+    
   }
 </script>
   

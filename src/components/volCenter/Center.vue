@@ -4,38 +4,9 @@
     <a-tabs
       :animated="false"
       class="title" 
-      default-active-key="2" 
+      default-active-key="1" 
       @change="changeSrc"
       >
-      <a-tab-pane key="2">
-        <span slot="tab">
-          <img v-if="audio == 0" src="/image/audio.png" alt="音量控制">
-          <img v-else-if="audio == 1" src="/image/audio_s.png" alt="音量控制">
-        </span>
-
-        <div class="tab-button" v-if="editButtonShow == 1">
-          <!-- 修改名称 -->
-          <img @click="editModeName" class='edit-mode' src="/image/edit.png" alt="修改名称">
-          <!-- 保存在本模式 -->
-          <img class='save-to-mode' src="/image/save_to_mode.png" alt="保存在本模式">
-          <!-- 另存为 -->
-          <img @click='save' class='save' src="/image/save.png" alt="另存为">
-        </div>
-
-        <div class="tab-button" v-else>
-          <!-- 另存为 -->
-          <img @click='save' class='save' src="/image/save.png" alt="另存为">
-        </div>
-
-        <!-- 选择模式 -->
-        <ModeList/>
-        <!-- 所有的音柱 -->
-        <ColumnList/>
-        <!-- 另存为 -->
-        <SaveModal/>
-        <!-- 修改模板名称 -->
-        <EditModal/>
-      </a-tab-pane>
       <a-tab-pane key="1">
         <span slot="tab">
           <img v-if="environment == 0" src="/image/environment.png" alt="环境控制">
@@ -45,12 +16,10 @@
 
 
         <div class="table-button">
-          <span>坐席：</span>
-          <img style="margin-left:16px" src="/image/open.png" alt="全启">
-          <img style="margin:0 20px 0 33px" src="/image/close.png" alt="全关">
+          <span>大屏：</span>
+          <img style="margin-left:16px" src="/image/open.png" alt="全启" @click="screenOpen">
+          <img style="margin:0 20px 0 33px" src="/image/close.png" alt="全关" @click="screenClose">
         </div>
-
-
 
         <!-- 屏幕设备 -->
         <Equipments/>
@@ -58,6 +27,26 @@
         <TableList/>
         <!-- 电子沙盘 -->
         <SandTable/>
+      </a-tab-pane>
+      <a-tab-pane key="2">
+        <span slot="tab">
+          <img v-if="audio == 0" src="/image/audio.png" alt="音量控制">
+          <img v-else-if="audio == 1" src="/image/audio_s.png" alt="音量控制">
+        </span>
+
+        <div class="tab-button">
+          <!-- 修改名称 -->
+          <img @click="editModeName" class='edit-mode' src="/image/edit.png" alt="修改名称">
+          <!-- 保存在本模式 -->
+          <img class='save-to-mode' src="/image/save_to_mode.png" alt="保存在本模式">
+        </div>
+
+        <!-- 选择模式 -->
+        <ModeList/>
+        <!-- 所有的音柱 -->
+        <ColumnList/>
+        <!-- 修改模板名称 -->
+        <EditModal/>
       </a-tab-pane>
     </a-tabs>
 
@@ -70,7 +59,6 @@ import ColumnList from './ColumnList';
 import Equipments from '../envCenter/Equipments';
 import TableList from '../envCenter/TableList';
 import SandTable from '../envCenter/SandTable';
-import SaveModal from './SaveModal';
 import EditModal from './EditModal';
   export default {
     name:'Center',
@@ -80,7 +68,6 @@ import EditModal from './EditModal';
       Equipments,
       TableList,
       SandTable,
-      SaveModal,
       EditModal
     },
     data(){
@@ -117,6 +104,18 @@ import EditModal from './EditModal';
       editModeName(){
         // 修改id对应模式的名字
         this.$events.emit('editModeName',{state:true,id:this.modeId,name:this.modeName});
+      },
+      // 大屏开
+      screenOpen(){
+        const screenList = _.first(this.$config.screenList);
+        const first = _.first(screenList.commandList);
+        console.log('大屏',first);
+      },
+      // 大屏关
+      screenClose(){
+        const screenList = _.first(this.$config.screenList);
+        const second = screenList.commandList[1];
+        console.log('大屏',second);
       }
     },
     mounted(){
