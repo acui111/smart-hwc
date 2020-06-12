@@ -48,10 +48,10 @@
 <script type="text/ecmascript-6">
   export default {
     name:'TotalItem',
-    props:['id','name'],
+    props:['id','name','value'],
     data(){
       return{
-        processPoint:30,
+        processPoint:this.value,
         duration:'100', //input range总分段
         // 控制静音的显示状态
         muteState:0,
@@ -88,17 +88,26 @@
       },
       //判断音量按钮显示状态
       judgeState(){
-        if (this.processPoint > 0 ) {
-          this.muteState = 0;
-          this.volState = 0;
-        }else if(this.processPoint == this.duration){
-          console.log('全音了');
+        if(this.processPoint == this.duration){
+          // 全音(100%)
           this.volState = 1;
           this.muteState = 0;
-        }else{
+        }else if(this.processPoint == 0){
+          // 静音(等于0)
           this.volState = 0;
           this.muteState = 1;
+        }else{
+          // (0-100%中间)
+          this.muteState = 0;
+          this.volState = 0;
         }
+      }
+    },
+    mounted(){
+      if (this.value == 100) {
+        this.volState = 1 ;
+      }else if(this.value == 0){
+        this.muteState = 1 ;
       }
     }
   }

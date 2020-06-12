@@ -2,11 +2,12 @@
   <div id="equipments-center">
     <!-- 中间全部坐席 -->
     <div id="table-list">
-      <template v-for="(tableItem,index) in tableList">
+      <template v-for="(seatItem,index) in seatList">
         <TableItem
           :key="index"
-          :num="tableItem"
-          :index="index"
+          :name="seatItem.name"
+          :id="seatItem.id"
+          :commandList="seatItem.commandList"
           />
       </template>
     </div>
@@ -26,8 +27,11 @@
     },
     data(){
       return{
-        tableList:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+        seatList:[],
       }
+    },
+    mounted(){
+      this.seatList = _.first(this.$config.seatList);
     }
   }
 </script>

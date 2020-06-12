@@ -1,0 +1,174 @@
+<template>
+  <div id="layout-mode-list">
+    <div class="layout-button">
+      <template v-for="scene in sceneList">
+        <button
+          @click="selectedMode(scene.id,scene.commandList)" 
+          id="scene.id"
+          class="layout-name"
+          >
+          {{scene.name}}
+        </button>
+      </template>
+    </div>
+    <template v-for="layout in layoutList">
+      <LayoutModeItem
+        :id="layout.id"
+        :layerList="layout.layerList"
+      />
+    </template>
+  </div>
+</template>
+
+<script>
+  import LayoutModeItem from './LayoutModeItem';
+  export default {
+    data(){
+      return{
+        sceneList:[],
+        layoutList:[
+          {
+            id:1,
+            layerList:[
+              {
+              id:1,
+              left:0,
+              top:0,
+              width:65536/2,
+              height:65536,
+              },
+              {
+                id:2,
+                left:65536/2,
+                top:0,
+                width:65536/2,
+                height:65536,
+              }
+            ]
+          },
+          {
+            id:2,
+            layerList:[
+            {
+              id:1,
+              top:0,
+              left:0,
+              width:65536/4,
+              height:65536/2,
+              },
+              {
+                id:2,
+                top:0,
+                left:65536/4,
+                width:65536/2,
+                height:65536,
+              },
+              {
+                id:3,
+                top:0,
+                left:(65536/4)*3,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:4,
+                top:65536/2,
+                left:0,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:5,
+                top:65536/2,
+                left:(65536/4)*3,
+                width:65536/4,
+                height:65536/2,
+              }
+            ]
+          },
+          {
+            id:3,
+            layerList:[
+              {
+                id:1,
+                left:0,
+                top:0,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:2,
+                left:65536/4,
+                top:0,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:3,
+                left:(65536/4)*2,
+                top:0,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:4,
+                left:(65536/4)*3,
+                top:0,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:5,
+                left:0,
+                top:65536/2,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:6,
+                left:65536/4,
+                top:65536/2,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:7,
+                left:(65536/4)*2,
+                top:65536/2,
+                width:65536/4,
+                height:65536/2,
+              },
+              {
+                id:8,
+                left:(65536/4)*3,
+                top:65536/2,
+                width:65536/4,
+                height:65536/2,
+              },
+            ]
+          }
+        ]
+      }
+    },
+    components:{
+      LayoutModeItem
+    },
+    methods:{
+      selectedMode(modeId,commandList){
+        this.$events.emit('selectedMode',({id:modeId}));
+        // console.log('切换屏幕发送的指令',commandList);
+      }
+    },
+    mounted(){
+      const screenList = _.first(this.$config.screenList);
+      this.sceneList = screenList.sceneList;
+    }
+  }
+</script>
+
+<style>
+  .layout-button{
+    display: flex;
+    justify-content: space-between;
+  }
+</style>

@@ -2,15 +2,15 @@
   <!-- 固定模式 -->
   <div id='fixed-mode'>
     <div class="mode-list">
-      <template v-for="(modeItem,index) in modeList" >
+      <template v-for="(fixdMode,index) in this.$config.fixedModeList" >
         <div
           id="mode-item" 
-          @click="selectMode(modeItem.id)"
-          :class="{active:modeItem.id == isActive}"
+          @click="selectMode(fixdMode.id,fixdMode.commandList)"
+          :class="{active:fixdMode.id == isActive}"
           >
           <!-- 默认 -->
-          <img style="width:73px;height:74px" :src="modeItem.id == isActive? Src: src" alt="模式">
-          <div class="name">{{modeItem.name}}</div>
+          <img style="width:73px;height:74px" :src="fixdMode.id == isActive? Src: src" alt="模式">
+          <div class="name">{{fixdMode.name}}</div>
         </div>
       </template>
     </div>
@@ -22,42 +22,17 @@
     name:'FixedMode',
     data(){
       return{
-        modeList:[
-          {
-            id:1,
-            name:'一键全开'
-          },
-          {
-            id:2,
-            name:'一键全关'
-          },
-          {
-            id:3,
-            name:'会议模式'
-          },
-          {
-            id:4,
-            name:'早间模式'
-          },
-          {
-            id:5,
-            name:'午间模式'
-          },
-          {
-            id:6,
-            name:'晚间模式'
-          }
-        ],
         isActive: 0,
         Src:'/image/button01_s.png',
         src:'/image/button01.png',
       }
     },
     methods: {
-      selectMode(id){
+      selectMode(id,commandList){
         this.isActive = id ;
+        // console.log('点击发送的指令',commandList);
       }
-    }
+    },
   }
 </script>
   
@@ -87,7 +62,8 @@
   #mode-item:hover{
     cursor: pointer;
   }
-  .name{
+  #mode-item .name{
+    color: #fff;
     font-size:14px;
     font-family:SimHei;
     position: relative;

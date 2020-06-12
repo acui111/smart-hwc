@@ -1,14 +1,14 @@
 <template>
   <div id="mode-list">
-    <template v-for="(modeItem,index) in modeList">
+    <template v-for="(volumeMode,index) in this.$config.volumeModeList">
       <div
-        :id="modeItem.id" 
-        @click="selectMode(modeItem.id,modeItem.name)"
-        :class="{active:modeItem.id == isActive}"
+        :id="volumeMode.id" 
+        @click="selectMode(volumeMode.id,volumeMode.name)"
+        :class="{active:volumeMode.id == isActive}"
         >
         <!-- 默认 -->
-        <img :src="modeItem.id == isActive? Src: src" alt="模式">
-        <p class='mode-name'>{{modeItem.name}}</p>
+        <img :src="volumeMode.id == isActive? Src: src" alt="模式">
+        <p class='mode-name'>{{volumeMode.name}}</p>
       </div>
     </template>
   </div>
@@ -19,44 +19,15 @@
     name:'ModelList',
     data(){
       return{
-        modeList:[
-          {
-            id:1,
-            name:'默认'
-          },
-          {
-            id:2,
-            name:'模式1'
-          },
-          {
-            id:3,
-            name:'模式2'
-          },
-          {
-            id:4,
-            name:'模式3'
-          },
-          {
-            id:5,
-            name:'模式4'
-          },
-          {
-            id:6,
-            name:'模式5'
-          }
-        ],
-        isActive: 1,
+        isActive: 0,
         src:'/image/button_pattern.png',
         Src:'/image/button_pattern_s.png'
       }
     },
     methods: {
       selectMode(id,name){
-        if (id > 1) {
-          this.$events.emit('editButtonShow',{state:1,id,name});
-        }else{
-          this.$events.emit('editButtonShow',{state:0,id,name});
-        }
+        this.$events.emit('editButtonShow',{state:1,id,name});
+        this.$events.emit('selectedModeId',{id});
         this.isActive = id;
       },
     }
@@ -72,7 +43,7 @@
     justify-content: space-around;
   }
   .mode-name{
-    width: 40px;
+    width: 50px;
     margin: 0px;
     font-size:16px;
     font-family:SimHei;
@@ -80,7 +51,7 @@
     position: relative;
     left: 50%;
     top: -80%;
-    margin-left: -20px;
+    margin-left: -24px;
   }
   .active{
     background:rgba(18,201,213,1);

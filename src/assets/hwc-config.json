@@ -1,0 +1,1334 @@
+{
+	"fixedModeList": [
+		{
+			"id": 1,
+			"name": "一键全开",
+			"commandList": [
+				"全开指令1",
+				"全开指令2",
+				"全开指令3",
+				"全开指令4"
+			]
+		},
+		
+		{
+			"id": 2,
+			"name": "一键全关",
+			"commandList": [
+				"全关指令1",
+				"全关指令2",
+				"全关指令3",
+				"全关指令4"
+			]
+		},
+		
+		{
+			"id": 3,
+			"name": "会议模式",
+			"commandList": [
+				"会议模式指令1",
+				"会议模式指令2",
+				"会议模式指令3",
+				"会议模式指令4"
+			]
+		},
+		
+		{
+			"id": 4,
+			"name": "早间模式",
+			"commandList": [
+				"早间模式指令1",
+				"早间模式指令2",
+				"早间模式指令3",
+				"早间模式指令4"
+			]
+		},
+		
+		{
+			"id": 5,
+			"name": "午间模式",
+			"commandList": [
+				"午间模式指令1",
+				"午间模式指令2",
+				"午间模式指令3",
+				"午间模式指令4"
+			]
+		},
+		
+		{
+			"id": 6,
+			"name": "晚间模式",
+			"commandList": [
+				"晚间模式指令1",
+				"晚间模式指令2",
+				"晚间模式指令3",
+				"晚间模式指令4"
+			]
+		}
+	],
+	
+	"customModeList": [
+		{
+			"id": 1,
+			"name": "自定义模式一",
+			"commandList": [
+				"模式一指令1",
+				"模式一指令2",
+				"模式一指令3",
+				"模式一指令4"
+			]
+		},
+		
+		{
+			"id": 2,
+			"name": "自定义模式二",
+			"commandList": [
+				"模式二指令1",
+				"模式二指令2",
+				"模式二指令3",
+				"模式二指令4"
+			]
+		},
+		
+		{
+			"id": 3,
+			"name": "自定义模式三",
+			"commandList": [
+				"模式三指令1",
+				"模式三指令2",
+				"模式三指令3",
+				"模式三指令4"
+			]
+		},
+		
+		{
+			"id": 4,
+			"name": "自定义模式四",
+			"commandList": [
+				"模式四指令1",
+				"模式四指令2",
+				"模式四指令3",
+				"模式四指令4"
+			]
+		},
+		
+		{
+			"id": 5,
+			"name": "自定义模式五",
+			"commandList": [
+				"模式五指令1",
+				"模式五指令2",
+				"模式五指令3",
+				"模式五指令4"
+			]
+		},
+		
+		{
+			"id": 6,
+			"name": "自定义模式六",
+			"commandList": [
+				"模式六指令1",
+				"模式六指令2",
+				"模式六指令3",
+				"模式六指令4"
+			]
+		}
+	],
+	
+	"volumeModeList": [
+		{
+			"id": 1,
+			"name": "模式一",
+			"volumeList": [
+				  [
+				     {
+						"id": 1,
+						"name": "总音量",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "左声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "右声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				  ],
+				  
+				  [
+				  
+					{
+						"id": 1,
+						"name": "坐席1",
+						"value": 100,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "坐席2",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "坐席3",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 4,
+						"name": "坐席4",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 5,
+						"name": "坐席5",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 6,
+						"name": "坐席6",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+
+					 {
+						"id":7,
+						"name": "智讯",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 8,
+						"name": "飞机",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 9,
+						"name": "会议",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				]
+			]
+		},
+		
+		{
+			"id": 2,
+			"name": "模式二",
+			"volumeList": [
+				  [
+				     {
+						"id": 1,
+						"name": "总音量",
+						"value": 100,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "左声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "右声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				  ],
+				  
+				  [
+				  
+					{
+						"id": 1,
+						"name": "坐席1",
+						"value": 20,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "坐席2",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "坐席3",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 4,
+						"name": "坐席4",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 5,
+						"name": "坐席5",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 6,
+						"name": "坐席6",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 {
+						"id": 7,
+						"name": "智讯",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 8,
+						"name": "飞机",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 9,
+						"name": "会议",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				]
+			]
+		},
+		
+		{
+			"id": 3,
+			"name": "模式三",
+			"volumeList": [
+				  [
+				     {
+						"id": 1,
+						"name": "总音量",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "左声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "右声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				  ],
+				  
+				  [
+				  
+					{
+						"id": 1,
+						"name": "坐席1",
+						"value": 30,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "坐席2",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "坐席3",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 4,
+						"name": "坐席4",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 5,
+						"name": "坐席5",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 6,
+						"name": "坐席6",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 {
+						"id": 7,
+						"name": "智讯",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 8,
+						"name": "飞机",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 9,
+						"name": "会议",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				]
+			]
+		},
+		
+		{
+			"id": 4,
+			"name": "模式四",
+			"volumeList": [
+				  [
+				     {
+						"id": 1,
+						"name": "总音量",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "左声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "右声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				  ],
+				  
+				  [
+				  
+					{
+						"id": 1,
+						"name": "坐席1",
+						"value": 40,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "坐席2",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "坐席3",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 4,
+						"name": "坐席4",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 5,
+						"name": "坐席5",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 6,
+						"name": "坐席6",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 {
+						"id": 7,
+						"name": "智讯",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 8,
+						"name": "飞机",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 9,
+						"name": "会议",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				]
+			]
+		},
+		
+		{
+			"id": 5,
+			"name": "模式五",
+			"volumeList": [
+				  [
+				     {
+						"id": 1,
+						"name": "总音量",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "左声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "右声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				  ],
+				  
+				  [
+				  
+					{
+						"id": 1,
+						"name": "坐席1",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "坐席2",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "坐席3",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 4,
+						"name": "坐席4",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 5,
+						"name": "坐席5",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 6,
+						"name": "坐席6",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 {
+						"id": 7,
+						"name": "智讯",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 8,
+						"name": "飞机",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 9,
+						"name": "会议",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				]
+			]
+		},
+		
+		{
+			"id": 6,
+			"name": "模式六",
+			"volumeList": [
+				  [
+				     {
+						"id": 1,
+						"name": "总音量",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "左声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "右声道",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				  ],
+				  
+				  [
+				  
+					{
+						"id": 1,
+						"name": "坐席1",
+						"value": 60,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 2,
+						"name": "坐席2",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 3,
+						"name": "坐席3",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 4,
+						"name": "坐席4",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 5,
+						"name": "坐席5",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 6,
+						"name": "坐席6",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 {
+						"id": 7,
+						"name": "智讯",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 8,
+						"name": "飞机",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 },
+					 
+					 {
+						"id": 9,
+						"name": "会议",
+						"value": 50,
+						"commandList": [
+							"指令1"
+						]
+					 }
+				]
+			]
+		}
+	],
+    
+	"ipCameraList": [
+		{
+			"id": 1,
+			"name": "前摄像头",
+			"commandList": [
+				"摄像头切换指令"
+			],
+			"presetPosition": [
+				{
+				  "id": 1,
+				  "name": "预置位一",
+				  "commandList": [
+					"前指令1"
+				  ]
+				},
+				
+				{
+				  "id": 2,
+				  "name": "预置位二",
+				  "commandList": [
+					"前指令2"
+				  ]
+				},
+				
+				{
+				  "id": 3,
+				  "name": "预置位三",
+				  "commandList": [
+					"前指令3"
+				  ]
+				},
+				
+				{
+				  "id": 4,
+				  "name": "预置位四",
+				  "commandList": [
+					"前指令4"
+				  ]
+				}
+			],
+			
+			"directionList":[
+				{
+					"id": 1,
+					"name":"向左",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				},
+				
+				{
+					"id": 2,
+					"name":"向右",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				},
+				
+				{
+					"id": 3,
+					"name":"向上",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				},
+				
+				{
+					"id": 4,
+					"name": "向下",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				}
+			],
+			
+			"focusList": [
+				{
+					"id": 1,
+					"name": "放大",
+					"commandList": [
+						"前按下指令放大1",
+						"前释放指令放大2"
+					]
+				},
+			
+				{
+					"id": 2,
+					"name": "缩小",
+					"commandList": [
+						"前按下指令缩小1",
+						"前释放指令缩小2"
+					]
+				}
+			]
+		},
+		
+		{
+			"id": 2,
+			"name": "后摄像头",
+			"commandList": [
+				"摄像头切换指令"
+			],
+			"presetPosition": [
+				{
+				  "id": 1,
+				  "name": "预置位一",
+				  "commandList": [
+					"后指令1"
+				  ]
+				},
+				
+				{
+				  "id": 2,
+				  "name": "预置位二",
+				  "commandList": [
+					"后指令2"
+				  ]
+				},
+				
+				{
+				  "id": 3,
+				  "name": "预置位四",
+				  "commandList": [
+					"后指令4"
+				  ]
+				},
+				
+				{
+				  "id": 4,
+				  "name": "预置位五",
+				  "commandList": [
+					"后指令5"
+				  ]
+				}
+			],
+			
+			"directionList":[
+				{
+					"id": 1,
+					"name":"向左",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				},
+				
+				{
+					"id": 2,
+					"name":"向右",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				},
+				
+				{
+					"id": 3,
+					"name":"向上",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				},
+				
+				{
+					"id": 4,
+					"name": "向下",
+					"commandList": [
+						"按下指令",
+						"释放指令"
+					]
+				}
+			],
+			
+			"focusList": [
+				{
+					"id": 1,
+					"name": "放大",
+					"commandList": [
+						"后按下指令放大1",
+						"后释放指令放大1"
+					]
+				},
+			
+				{
+					"id": 2,
+					"name": "缩小",
+					"commandList": [
+						"后按下指令缩小1",
+						"后释放指令缩小2"
+					]
+				}
+			]
+		}
+	],
+	
+	"seatList": [
+		[
+			{
+				"id": 1,
+				"name": "坐席1",
+				"commandList": [
+					"主屏指令1",
+					"副屏指令1"
+				]
+			},
+			
+			{
+				"id": 2,
+				"name": "坐席2",
+				"commandList": [
+					"主屏指令2",
+					"副屏指令2"
+				]
+			},
+			
+			{
+				"id": 3,
+				"name": "坐席3",
+				"commandList": [
+					"主屏指令3",
+					"副屏指令3"
+				]
+			},
+			
+			{
+				"id": 4,
+				"name": "坐席4",
+				"commandList": [
+					"主屏指令4",
+					"副屏指令4"
+				]
+			},
+			
+			{
+				"id": 5,
+				"name": "坐席5",
+				"commandList": [
+					"主屏指令5",
+					"副屏指令5"
+				]
+			},
+			
+			{
+				"id": 6,
+				"name": "坐席6",
+				"commandList": [
+					"主屏指令6",
+					"副屏指令6"
+				]
+			},
+			
+			{
+				"id": 7,
+				"name": "坐席7",
+				"commandList": [
+					"主屏指令7",
+					"副屏指令7"
+				]
+			},
+			
+			{
+				"id": 8,
+				"name": "坐席8",
+				"commandList": [
+					"主屏指令8",
+					"副屏指令8"
+				]
+			},
+			
+			{
+				"id": 9,
+				"name": "坐席9",
+				"commandList": [
+					"主屏指令9",
+					"副屏指令9"
+				]
+			},
+			
+			{
+				"id": 10,
+				"name": "坐席10",
+				"commandList": [
+					"主屏指令10",
+					"副屏指令10"
+				]
+			},
+			
+			{
+				"id": 11,
+				"name": "坐席11",
+				"commandList": [
+					"主屏指令11",
+					"副屏指令11"
+				]
+			},
+			
+			{
+				"id": 12,
+				"name": "坐席12",
+				"commandList": [
+					"主屏指令12",
+					"副屏指令12"
+				]
+			},
+			
+			{
+				"id": 13,
+				"name": "坐席13",
+				"commandList": [
+					"主屏指令13",
+					"副屏指令13"
+				]
+			},
+			
+			{
+				"id": 14,
+				"name": "坐席14",
+				"commandList": [
+					"主屏指令14",
+					"副屏指令14"
+				]
+			},
+			
+			{
+				"id": 15,
+				"name": "坐席15",
+				"commandList": [
+					"主屏指令15",
+					"副屏指令15"
+				]
+			},
+			
+			{
+				"id": 16,
+				"name": "坐席16",
+				"commandList": [
+					"主屏指令16",
+					"副屏指令16"
+				]
+			},
+			
+			{
+				"id": 17,
+				"name": "坐席17",
+				"commandList": [
+					"主屏指令17",
+					"副屏指令17"
+				]
+			},
+			
+			{
+				"id": 18,
+				"name": "坐席18",
+				"commandList": [
+					"主屏指令18",
+					"副屏指令18"
+				]
+			}
+		],
+		
+		[
+			{
+				"id": 19,
+				"name": "坐席19",
+				"commandList": [
+					"主屏指令19",
+					"副屏指令19"
+				]
+			},
+			
+			{
+				"id": 20,
+				"name": "坐席20",
+				"commandList": [
+					"主屏指令20",
+					"副屏指令20"
+				]
+			}
+		],
+
+		[	
+			{
+				"id": 21,
+				"name": "坐席21",
+				"commandList": [
+					"主屏指令21",
+					"副屏指令21"
+				]
+			},
+			
+			{
+				"id": 22,
+				"name": "坐席22",
+				"commandList": [
+					"主屏指令22",
+					"副屏指令22"
+				]
+			}
+		
+		],
+		
+		[
+		
+			{
+				"id": 1,
+				"name": "领导1",
+				"commandList": [
+					"主屏指令领导1",
+					"副屏指令领导1"
+				]
+			},
+			
+			{
+				"id": 2,
+				"name": "领导2",
+				"commandList": [
+					"主屏指令领导2",
+					"副屏指令领导2"
+				]
+			}
+		
+		],
+		
+		[
+			{
+				"id": 1,
+				"name": "导播1",
+				"commandList": [
+					"主屏指令导播1",
+					"副屏指令导播1"
+				]
+			},
+			
+			{
+				"id": 2,
+				"name": "导播2",
+				"commandList": [
+					"主屏指令导播2",
+					"副屏指令导播2"
+				]
+			}
+	  ]
+	
+	],
+	
+	"screenList": [
+		{
+			"id": 1,
+			"name": "前大屏",
+			"commandList":[
+				"大屏开",
+				"大屏关"
+			],
+			"sceneList": [
+				{
+					"id": 1,
+					"name": "二分屏",
+					"commandList": [
+						"指令2"
+					]
+				},
+				
+				{
+					"id": 2,
+					"name": "五分屏",
+					"commandList": [
+						"指令5"
+					]
+				},
+				
+				{
+					"id": 3,
+					"name": "八分屏",
+					"commandList": [
+						"指令8"
+					]
+				}
+			]
+		}
+	]
+}
