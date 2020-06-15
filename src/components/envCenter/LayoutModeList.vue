@@ -2,13 +2,13 @@
   <div id="layout-mode-list">
     <div class="layout-button">
       <template v-for="scene in sceneList">
-        <button
+        <img
           @click="selectedMode(scene.id,scene.commandList)" 
           id="scene.id"
-          class="layout-name"
-          >
-          {{scene.name}}
-        </button>
+          class="layout-name" 
+          :src="'/image/envImg/screen'+`${scene.id}`+'.png'" 
+          alt="大屏"
+          />
       </template>
     </div>
     <template v-for="layout in layoutList">
@@ -156,7 +156,7 @@
     methods:{
       selectedMode(modeId,commandList){
         this.$events.emit('selectedMode',({id:modeId}));
-        // console.log('切换屏幕发送的指令',commandList);
+        console.log('切换屏幕发送的指令',_.first(commandList));
       }
     },
     mounted(){

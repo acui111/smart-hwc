@@ -2,17 +2,33 @@
   <div class="leader">
     <div>
       <div class="seat-item draggable">
-        <div ref="leader-screen-home1">主屏</div>
-        <div ref="leader-screen-vice1">副屏</div>
-      </div>
-      <div class="name">领导1</div>
+        <img
+        src="/image/envImg/screen_home.png"
+        ref="leader-screen-home1"
+        alt="主屏"
+        />
+      <img
+        src="/image/envImg/screen_vice.png"
+        ref="leader-screen-vice1"
+        alt="副屏"
+        />
+    </div>
+    <div class="name">领导1</div>
     </div>
     <div>
       <div class="seat-item draggable">
-        <div ref="leader-screen-home2">主屏</div>
-        <div ref="leader-screen-vice2">副屏</div>
-      </div>
-      <div class="name">领导2</div>
+        <img
+        src="/image/envImg/screen_home.png"
+        ref="leader-screen-home2"
+        alt="主屏"
+        />
+      <img
+        src="/image/envImg/screen_vice.png"
+        ref="leader-screen-vice2"
+        alt="副屏"
+        />
+    </div>
+    <div class="name">领导2</div>
     </div>
   </div>
 </template>
@@ -218,20 +234,15 @@
     display: inline-block;
   }
   .seat-item{
-    width:92px;
+    width:100px;
     height:36px;
     line-height: 36px;
     display:flex;
     justify-content:space-around;
-    background:linear-gradient(180deg,rgba(123,241,248,1),rgba(61,239,255,1));
-    opacity:0.7;
-    border-radius:2px;
   }
-  .seat-item div{
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    border: 0.5px solid #666;
+  .seat-item img{
+    width: 50px;
+    height: 36px;
     touch-action: none;
   }
 </style>
