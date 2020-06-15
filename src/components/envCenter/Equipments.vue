@@ -29,7 +29,7 @@
     methods: {
       switchCamera(){
         this.$editor.camera = _.first(this.$config.ipCameraList);
-        // console.log('摄像头切换指令',this.$editor.camera.commandList);
+        console.log('前摄像头切换指令',_.first(this.$editor.camera.commandList));
       }
     }
   }

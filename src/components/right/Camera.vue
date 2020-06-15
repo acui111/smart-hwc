@@ -22,15 +22,49 @@
     <div class="adjust">
       <div class="adjust-button">
         <div class="adjust-direction">
-          <img class="up" src="/image/button_up.png" alt="向上">
-          <img class="down" src="/image/button_down.png" alt="向下">
-          <img class="left" src="/image/button_left.png" alt="向左">
-          <img class="right" src="/image/button_right.png" alt="向右">
+          <img 
+            class="up"
+            @mousedown="upMouseDown" 
+            @mouseup="upMouseUp"
+            src="/image/button_up.png" 
+            alt="向上"
+            >
+          <img 
+            class="down"
+            @mousedown="downMouseDown" 
+            @mouseup="downMouseUp"
+            src="/image/button_down.png" 
+            alt="向下"
+            >
+          <img 
+            class="left" 
+            @mousedown="leftMouseDown" 
+            @mouseup="leftMouseUp"
+            src="/image/button_left.png" 
+            alt="向左"
+            >
+          <img 
+            class="right"
+            @mousedown="rightMouseDown" 
+            @mouseup="rightMouseUp" 
+            src="/image/button_right.png" 
+            alt="向右"
+            >
         </div>
       </div>
       <div class="vol-button">
-        <button style="margin-top:55px" @click="add">焦距+</button>
-        <button style="margin-top:40px" @click="reduce">焦距-</button>
+        <img
+          src="/image/envImg/add.png"
+          style="margin-top:55px"
+          @mousedown="addMouseDown" 
+          @mouseup="addMouseUp" 
+          />
+        <img
+          src="/image/envImg/reduce.png"
+          style="margin-top:40px" 
+          @mousedown="reduceMouseDown" 
+          @mouseup="reduceMouseUp" 
+          />
       </div>
     </div>
   </div>
@@ -54,20 +88,161 @@
       // 选择预置位
       selectLocation(locationItem,index){
         this.value = locationItem.name;
-        console.log('选择摄像头的预置位',locationItem.commandList);
+        console.log('选择摄像头的预置位',_.first(locationItem.commandList));
         this.isActive = index;
         this.show = false;
       },
-      // 放大焦距
-      add(){
-        const focusList = _.first(this.$editor.camera.focusList);
-        // console.log(focusList.commandList);
+
+      // 摄像头向上按下
+      upMouseDown(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const downCommandList = _.first(this.$config.ipCameraList).directionList[2];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }else{
+          const downCommandList = this.$config.ipCameraList[1].directionList[2];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }
       },
-      // 缩小焦距
-      reduce(){
-        const focusList = this.$editor.camera.focusList[1];
-        // console.log(focusList.commandList);
-      }
+      // 摄像头向上抬起
+      upMouseUp(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const upCommandList = _.first(this.$config.ipCameraList).directionList[2];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }else{
+          const upCommandList = this.$config.ipCameraList[1].directionList[2];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }
+      },
+
+      // 摄像头向下按下
+      downMouseDown(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const downCommandList = _.first(this.$config.ipCameraList).directionList[3];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }else{
+          const downCommandList = this.$config.ipCameraList[1].directionList[3];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }
+      },
+      // 摄像头向下抬起
+      downMouseUp(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const upCommandList = _.first(this.$config.ipCameraList).directionList[3];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }else{
+          const upCommandList = this.$config.ipCameraList[1].directionList[3];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }
+      },
+
+      // 摄像头向左按下
+      leftMouseDown(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const downCommandList = _.first(this.$config.ipCameraList).directionList[0];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }else{
+          const downCommandList = this.$config.ipCameraList[1].directionList[0];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }
+      },
+      // 摄像头向左抬起
+      leftMouseUp(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const upCommandList = _.first(this.$config.ipCameraList).directionList[0];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }else{
+          const upCommandList = this.$config.ipCameraList[1].directionList[0];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }
+      },
+
+      // 摄像头向右按下
+      rightMouseDown(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const downCommandList = _.first(this.$config.ipCameraList).directionList[1];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }else{
+          const downCommandList = this.$config.ipCameraList[1].directionList[1];
+          const downCommand = _.first(downCommandList.commandList);
+          console.log(downCommand);
+        }
+      },
+      // 摄像头向右抬起
+      rightMouseUp(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const upCommandList = _.first(this.$config.ipCameraList).directionList[1];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }else{
+          const upCommandList = this.$config.ipCameraList[1].directionList[1];
+          const upCommand = upCommandList.commandList[1];
+          console.log(upCommand);
+        }
+      },
+
+
+      // 放大焦距按下
+      addMouseDown(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const focusList = _.first(this.$config.ipCameraList).focusList[0];
+          const upCommand = _.first(focusList.commandList);
+          console.log(upCommand);
+        }else{
+          const focusList = this.$config.ipCameraList[1].focusList[0];
+          const upCommand = _.first(focusList.commandList);
+          console.log(upCommand);
+        }
+      },
+      // 放大焦距抬起
+      addMouseUp(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const focusList = _.first(this.$config.ipCameraList).focusList[0];
+          const upCommand = focusList.commandList[1];
+          console.log(upCommand);
+        }else{
+          const focusList = this.$config.ipCameraList[1].focusList[0];
+          const upCommand = focusList.commandList[1];
+          console.log(upCommand);
+        }
+      },
+
+      // 缩小焦距按下
+      reduceMouseDown(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const focusList = _.first(this.$config.ipCameraList).focusList[1];
+          const upCommand = _.first(focusList.commandList);
+          console.log(upCommand);
+        }else{
+          const focusList = this.$config.ipCameraList[1].focusList[1];
+          const upCommand = _.first(focusList.commandList);
+          console.log(upCommand);
+        }
+      },
+      // 缩小焦距抬起
+      reduceMouseUp(){
+        if (this.$editor.camera.name == '前摄像头') {
+          const focusList = _.first(this.$config.ipCameraList).focusList[1];
+          const upCommand = focusList.commandList[1];
+          console.log(upCommand);
+        }else{
+          const focusList = this.$config.ipCameraList[1].focusList[1];
+          const upCommand = focusList.commandList[1];
+          console.log(upCommand);
+        }
+      },
     },
     mounted(){
       this.$editor.camera = _.first(this.$config.ipCameraList);
@@ -160,7 +335,7 @@
     color: #00F5FF;
   }
   .adjust{
-    width: 90%;
+    width: 70%;
     height: calc(100% - 360px);
     position:absolute;
     top:50%;
@@ -174,8 +349,8 @@
     position: relative;
   }
   .adjust .adjust-button .adjust-direction{
-    width:150px;
-    height: 140px;
+    width:151px;
+    height: 144px;
     position:relative;
     left: 50%;
     top: 40%;
@@ -186,30 +361,30 @@
   }
   .adjust .adjust-button .adjust-direction .up{
     width: 100px;
-    height: 56px;
+    height: 50px;
     position:absolute;
-    left: 18%;
-    top: -2%;
+    left: 16%;
+    top: 3%;
   }
   .adjust .adjust-button .adjust-direction .down{
     width: 100px;
-    height: 56px;
+    height: 50px;
     position:absolute;
-    right: 18%;
-    bottom:-2%;
+    right: 17%;
+    bottom: 3%;
   }
   .adjust .adjust-button .adjust-direction .left{
-    width: 56px;
-    height: 100px;
+    width: 50px;
+    height: 98px;
     position:absolute;
-    left: -1%;
+    left: 4%;
     top: 16%;
   }
   .adjust .adjust-button .adjust-direction .right{
-    width: 56px;
-    height: 100px;
+    width: 50px;
+    height: 98px;
     position:absolute;
-    right: -1%;
+    right: 4%;
     top:16%;
   }
   .adjust-name{
@@ -225,11 +400,11 @@
   .vol-button{
     width: 10%;
     position: relative;
-    left: -10%;
+    left: 0;
     top: 0;
   }
-  .vol-button button{
-    width: 60px;
+  .vol-button img{
+    width: 70px;
     height: 30px;
   }
   /* 滑动条 */

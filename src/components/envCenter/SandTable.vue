@@ -42,7 +42,7 @@ import VolTable from './VolTable';
     methods:{
       switchCamera(){
         this.$editor.camera = this.$config.ipCameraList[1];
-        // console.log('摄像头切换指令',this.$editor.camera.commandList);
+        console.log('后摄像头切换指令',_.first(this.$editor.camera.commandList));
       }
     },
   }

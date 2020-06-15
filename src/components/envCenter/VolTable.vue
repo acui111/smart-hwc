@@ -2,17 +2,33 @@
   <div class="play">
     <div>
       <div class="seat-item draggable">
-        <div ref="vol-screen-home1">主屏</div>
-        <div ref="vol-screen-vice1">副屏</div>
-      </div>
-      <div class="name">导播1</div>
+        <img
+        src="/image/envImg/screen_home.png"
+        ref="vol-screen-home1"
+        alt="主屏"
+        />
+      <img
+        src="/image/envImg/screen_vice.png"
+        ref="vol-screen-vice1"
+        alt="副屏"
+        />
+    </div>
+    <div class="name">导播1</div>
     </div>
     <div>
       <div class="seat-item draggable">
-        <div ref="vol-screen-home2">主屏</div>
-        <div ref="vol-screen-vice2">副屏</div>
-      </div>
-      <div class="name">导播2</div>
+        <img
+        src="/image/envImg/screen_home.png"
+        ref="vol-screen-home2"
+        alt="主屏"
+        />
+      <img
+        src="/image/envImg/screen_vice.png"
+        ref="vol-screen-vice2"
+        alt="副屏"
+        />
+    </div>
+    <div class="name">导播2</div>
     </div>
     <img style="width:33px;height:44px;margin:6px 0 0 70px" src="/image/envImg/icon10.png" alt="导播灯">
   </div>
@@ -220,20 +236,15 @@
     display: inline-block;
   }
   .seat-item{
-    width:92px;
+    width:100px;
     height:36px;
     line-height: 36px;
     display:flex;
     justify-content:space-around;
-    background:linear-gradient(180deg,rgba(123,241,248,1),rgba(61,239,255,1));
-    opacity:0.7;
-    border-radius:2px;
   }
-  .seat-item div{
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    border: 0.5px solid #666;
+  .seat-item img{
+    width: 50px;
+    height: 36px;
     touch-action: none;
   }
 </style>

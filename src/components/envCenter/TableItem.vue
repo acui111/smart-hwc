@@ -2,8 +2,16 @@
   <!-- 每一项坐席 -->
   <div :class="sstt[id]" id="table-item">
     <div class="table-item draggable">
-      <div ref="screen-home">主屏</div>
-      <div ref="screen-vice">副屏</div>
+      <img
+        src="/image/envImg/screen_home.png"
+        ref="screen-home"
+        alt="主屏"
+        />
+      <img
+        src="/image/envImg/screen_vice.png"
+        ref="screen-vice"
+        alt="副屏"
+        />
     </div>
     <div class="name">{{name}}</div>
   </div>
@@ -71,7 +79,7 @@
       .on("move", (ev) => {
         if (ev.interaction.pointerIsDown && !ev.interaction.interacting()) {
           const first = _.first(this.commandList);
-          // console.log('开始托拽主屏',first);
+          console.log('开始托拽主屏',first);
         }
       })
       .on("down", (ev)=>{})
@@ -111,7 +119,7 @@
       .on("move", (ev) => {
         if (ev.interaction.pointerIsDown && !ev.interaction.interacting()) {
           const second = this.commandList[1];
-          // console.log('开始托拽副屏',second);
+          console.log('开始托拽副屏',second);
         }
       })
       .on("down", (ev)=>{})
@@ -128,21 +136,9 @@
   #table-item .name{
     color:#fff;
   }
-  .table-item{
-    width:92px;
-    height:36px;
-    line-height: 36px;
-    display:flex;
-    justify-content:space-around;
-    background:linear-gradient(180deg,rgba(123,241,248,1),rgba(61,239,255,1));
-    opacity:0.7;
-    border-radius:2px;
-  }
-  .table-item div{
-    width: 50%;
-    height: 100%;
-    text-align: center;
-    border: 0.5px solid #666;
+  .table-item img{
+    width: 50px;
+    height: 36px;
     touch-action: none;
   }
   .ss4,.ss10,.ss16{

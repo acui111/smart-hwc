@@ -16,9 +16,8 @@
 
 
         <div class="table-button">
-          <span>大屏：</span>
-          <img style="margin-left:16px" src="/image/open.png" alt="全启" @click="screenOpen">
-          <img style="margin:0 20px 0 33px" src="/image/close.png" alt="全关" @click="screenClose">
+          <img style="margin-left:16px" src="/image/envImg/open.png" alt="大屏开" @click="screenOpen">
+          <img style="margin:0 20px 0 33px" src="/image/envImg/close.png" alt="大屏关" @click="screenClose">
         </div>
 
         <!-- 屏幕设备 -->
@@ -73,9 +72,9 @@ import EditModal from './EditModal';
     data(){
       return{
         // tab环境控制
-        environment:0,
+        environment:1,
         // tab音频控制
-        audio:1,
+        audio:0,
         // tab右侧按钮
         editButtonShow:0,
         // 模式名

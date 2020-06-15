@@ -31,7 +31,7 @@
     methods: {
       selectMode(id,commandList){
         this.isActive = id ;
-        // console.log('选中后发送的指令',commandList);
+        console.log('选中后发送的指令',commandList);
       },
     }
   }
