@@ -75,6 +75,8 @@
         editModeVisible:false,
         // 模式名
         modeName:"",
+        //id
+        modeId:null,
       }
     },
     methods: {
@@ -84,7 +86,23 @@
       },
       // 保存修改
       saveModeName(){
-        // console.log('修改后的名字',this.modeName);
+        const volumeModeList = _.map(this.$editor.configs.volumeModeList,(volumeMode)=>{
+          if (volumeMode.id == this.modeId) {
+            volumeMode.name = this.modeName;
+          }
+          return volumeMode;
+        })
+        this.$editor.configs.volumeModeList = volumeModeList;
+        this.$http.put('/api/configs',this.$editor.configs)
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
         this.editModeVisible = false;
       },
       // 取消修改
@@ -96,6 +114,7 @@
       this.$events.on('editModeName',({state,id,name})=>{
         this.editModeVisible = state;
         this.modeName = name;
+        this.modeId = id;
       })
     }
   }

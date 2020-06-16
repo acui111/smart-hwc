@@ -2,7 +2,7 @@
   <!-- 自定义预案 -->
   <div id="custom">
     <div class="custom-list">
-      <template v-for="(customMode,index) in this.$config.customModeList">
+      <template v-for="(customMode,index) in this.$editor.configs.customModeList">
         <div
           id="custom-item" 
           @click="selectMode(customMode.id,customMode.commandList)"
@@ -31,7 +31,22 @@
     methods: {
       selectMode(id,commandList){
         this.isActive = id ;
-        console.log('选中后发送的指令',commandList);
+        this.$http.post('/api/controls',{
+          "type": "MODE",
+          "action": "SELECT",
+          "orders": commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }else{
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
     }
   }

@@ -7,6 +7,7 @@
         :id="totalItem.id"
         :name="totalItem.name"
         :value="totalItem.value"
+        :commandList="totalItem.commandList"
       />
     </template>
   </div>
@@ -19,12 +20,12 @@
     components:{
       TotalItem
     },
-    data(){
-      return{
-  
-      }
-    },
-    
+    mounted(){
+      this.$events.on('changeAllVol',({id,vol})=>{
+        const columnItem = _.find(this.$editor.allVol,{id});
+        columnItem.value = vol;
+      });
+    }
   }
 </script>
   

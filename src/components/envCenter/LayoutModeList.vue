@@ -11,8 +11,9 @@
           />
       </template>
     </div>
-    <template v-for="layout in layoutList">
+    <template v-for="(layout,index) in sceneList">
       <LayoutModeItem
+        :screenListId="screenListId"
         :id="layout.id"
         :layerList="layout.layerList"
       />
@@ -26,128 +27,7 @@
     data(){
       return{
         sceneList:[],
-        layoutList:[
-          {
-            id:1,
-            layerList:[
-              {
-              id:1,
-              left:0,
-              top:0,
-              width:65536/2,
-              height:65536,
-              },
-              {
-                id:2,
-                left:65536/2,
-                top:0,
-                width:65536/2,
-                height:65536,
-              }
-            ]
-          },
-          {
-            id:2,
-            layerList:[
-            {
-              id:1,
-              top:0,
-              left:0,
-              width:65536/4,
-              height:65536/2,
-              },
-              {
-                id:2,
-                top:0,
-                left:65536/4,
-                width:65536/2,
-                height:65536,
-              },
-              {
-                id:3,
-                top:0,
-                left:(65536/4)*3,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:4,
-                top:65536/2,
-                left:0,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:5,
-                top:65536/2,
-                left:(65536/4)*3,
-                width:65536/4,
-                height:65536/2,
-              }
-            ]
-          },
-          {
-            id:3,
-            layerList:[
-              {
-                id:1,
-                left:0,
-                top:0,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:2,
-                left:65536/4,
-                top:0,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:3,
-                left:(65536/4)*2,
-                top:0,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:4,
-                left:(65536/4)*3,
-                top:0,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:5,
-                left:0,
-                top:65536/2,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:6,
-                left:65536/4,
-                top:65536/2,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:7,
-                left:(65536/4)*2,
-                top:65536/2,
-                width:65536/4,
-                height:65536/2,
-              },
-              {
-                id:8,
-                left:(65536/4)*3,
-                top:65536/2,
-                width:65536/4,
-                height:65536/2,
-              },
-            ]
-          }
-        ]
+        screenListId:null,
       }
     },
     components:{
@@ -156,12 +36,33 @@
     methods:{
       selectedMode(modeId,commandList){
         this.$events.emit('selectedMode',({id:modeId}));
-        console.log('切换屏幕发送的指令',_.first(commandList));
+        this.$http.post('/api/controls',{
+          "type": "DISPLAY",
+          "action": "PRESET",
+          "orders": commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       }
     },
     mounted(){
-      const screenList = _.first(this.$config.screenList);
-      this.sceneList = screenList.sceneList;
+      this.$http.get('/api/configs')
+      .then(response=>{
+        const result = response.data;
+        const screenList = _.first(result.data.screenList);
+        this.screenListId = screenList.id;
+        this.sceneList = screenList.sceneList;
+      })
+      .catch(error=>{
+        this.$message.error(error.response.data.message);
+      })
     }
   }
 </script>

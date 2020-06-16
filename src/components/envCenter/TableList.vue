@@ -31,7 +31,11 @@
       }
     },
     mounted(){
-      this.seatList = _.first(this.$config.seatList);
+      this.$http.get('/api/configs')
+      .then(response=>{
+        const result = response.data;
+        this.seatList = _.first(result.data.seatList);
+      })
     }
   }
 </script>

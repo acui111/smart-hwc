@@ -28,8 +28,23 @@
     },
     methods: {
       switchCamera(){
-        this.$editor.camera = _.first(this.$config.ipCameraList);
-        console.log('前摄像头切换指令',_.first(this.$editor.camera.commandList));
+        this.$editor.camera = _.first(this.$editor.configs.ipCameraList);
+        this.$http.post('/api/controls',{
+          "type": "IPC",
+          "action": "SELECT",
+          "orders": this.$editor.camera.commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }else{
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       }
     }
   }

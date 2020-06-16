@@ -1,7 +1,7 @@
 <template>
   <div id="column-list">
     <!-- 坐席 -->
-    <template v-for="(column,index) in columnList" >
+    <template v-for="(column,index) in this.$editor.columnList" >
       <ColumnItem
         :key="index"
         :id="column.id"
@@ -24,19 +24,43 @@
     data(){
       return{
         columnList:[],
+        data:[],
       }
     },
     mounted(){
-      this.$events.on('changevalue',({id,value})=>{
-        const columnItem = _.find(this.columnList,{id});
-        columnItem.value = value;
-        this.$events.emit('values',{values:this.columnList});
+      this.$http.get('/api/configs')
+      .then(response=>{
+        const result = response.data;
+        this.data = result.data;
+      })
+
+
+      this.$events.on('changeVol',({id,vol})=>{
+        const columnItem = _.find(this.$editor.columnList,{id});
+        columnItem.value = vol;
       });
+
+
       this.$events.on('selectedModeId',({id})=>{
-        const columnList = _.find(this.$config.volumeModeList,{id});
+        const columnList = _.find(this.data.volumeModeList,{id});
         this.$editor.allVol = _.first(columnList.volumeList);
-        this.columnList = columnList.volumeList[1];
-        // console.log(this.columnList);
+        this.$editor.columnList = columnList.volumeList[1];
+      })
+
+
+
+
+
+      this.$http.post('/api/controls',{
+        "type": "VOLUME",
+        "action": "GET",
+        "orders": []
+      })
+      .then(response=>{
+        
+      })
+      .catch(error=>{
+        this.$message.error(error.response.data.message);
       })
     }
   }
