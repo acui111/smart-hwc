@@ -23,7 +23,7 @@
       :max ="duration" 
       min ="0" 
       step="1" 
-      @input = "changeProcess()" 
+      @input = "changeProcess(id)" 
       :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ processPoint*100/duration +'% 100% no-repeat'}
       "
       />
@@ -48,7 +48,7 @@
 <script type="text/ecmascript-6">
   export default {
     name:'TotalItem',
-    props:['id','name','value'],
+    props:['id','name','value','commandList'],
     data(){
       return{
         processPoint:this.value,
@@ -61,10 +61,29 @@
     },
     methods: {
       //滑动滑块
-      changeProcess(){
+      changeProcess(id){
         var range = this.$refs.processRange;
         this.processPoint = range.value;
         this.judgeState();
+        this.$events.emit('changeAllVol',{id,vol:this.processPoint});
+        let compiled = _.template(this.commandList);
+        this.compiled = compiled({
+          volume : this.processPoint
+        });
+        this.$http.post('/api/controls',{
+          "type": "VOLUME",
+          "action": "SET",
+          "orders": this.compiled
+        })
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
       //100%
       vol(){

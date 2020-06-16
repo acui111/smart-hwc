@@ -8,9 +8,7 @@
         <img style="width:33px;height:50px" src="/image/envImg/icon8.png" alt="前灯2">
       </div>
       <!-- 电子沙盘 -->
-      <div class="sand-table">
-        <img style="width:172px;height:111px" src="/image/envImg/sand_table.png" alt="电子沙盘">
-      </div>
+      <ElectronicTable/>
       <!-- 沙盘左坐席 -->
       <SandTableLeft/>
       <!-- 沙盘右坐席 -->
@@ -28,12 +26,14 @@
 </template>
   
 <script type="text/ecmascript-6">
+import ElectronicTable from './ElectronicTable';
 import SandTableLeft from './SandTableLeft';
 import SandTableRight from './SandTableRight';
 import LeaderTable from './LeaderTable';
 import VolTable from './VolTable';
   export default {
     components:{
+      ElectronicTable,
       SandTableLeft,
       SandTableRight,
       LeaderTable,
@@ -41,8 +41,23 @@ import VolTable from './VolTable';
     },
     methods:{
       switchCamera(){
-        this.$editor.camera = this.$config.ipCameraList[1];
-        console.log('后摄像头切换指令',_.first(this.$editor.camera.commandList));
+        this.$editor.camera = this.$editor.configs.ipCameraList[1];
+        this.$http.post('/api/controls',{
+          "type": "IPC",
+          "action": "SELECT",
+          "orders": this.$editor.camera.commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }else{
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       }
     },
   }
@@ -66,15 +81,6 @@ import VolTable from './VolTable';
     display: flex;
     justify-content: space-between;
     
-  }
-  .sand-table{
-    width: 172px;
-    height: 111px;
-    position:absolute;
-    left: 50%;
-    top: 32%;
-    margin-left: -86px;
-    margin-top: -55px;
   }
   /* 后摄像头 */
   .rear-camera{

@@ -88,108 +88,395 @@
       // 选择预置位
       selectLocation(locationItem,index){
         this.value = locationItem.name;
-        console.log('选择摄像头的预置位',_.first(locationItem.commandList));
         this.isActive = index;
         this.show = false;
+        this.$http.post('/api/controls',{
+          "type": "IPC",
+          "action": "PRESET",
+          "orders":locationItem.commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }else{
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
 
       // 摄像头向上按下
       upMouseDown(){
         if (this.$editor.camera.name == '前摄像头') {
-          const downCommandList = _.first(this.$config.ipCameraList).directionList[2];
+          const downCommandList = _.first(this.$editor.configs.ipCameraList).directionList[2];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "UP",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const downCommandList = this.$config.ipCameraList[1].directionList[2];
+          const downCommandList = this.$editor.configs.ipCameraList[1].directionList[2];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "UP",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
-      // 摄像头向上抬起
+      // 摄像头向上释放
       upMouseUp(){
         if (this.$editor.camera.name == '前摄像头') {
-          const upCommandList = _.first(this.$config.ipCameraList).directionList[2];
+          const upCommandList = _.first(this.$editor.configs.ipCameraList).directionList[2];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "UP",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const upCommandList = this.$config.ipCameraList[1].directionList[2];
+          const upCommandList = this.$editor.configs.ipCameraList[1].directionList[2];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "UP",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
 
       // 摄像头向下按下
       downMouseDown(){
         if (this.$editor.camera.name == '前摄像头') {
-          const downCommandList = _.first(this.$config.ipCameraList).directionList[3];
+          const downCommandList = _.first(this.$editor.configs.ipCameraList).directionList[3];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "DOWN",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const downCommandList = this.$config.ipCameraList[1].directionList[3];
+          const downCommandList = this.$editor.configs.ipCameraList[1].directionList[3];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "DOWN",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
-      // 摄像头向下抬起
+      // 摄像头向下释放
       downMouseUp(){
         if (this.$editor.camera.name == '前摄像头') {
-          const upCommandList = _.first(this.$config.ipCameraList).directionList[3];
+          const upCommandList = _.first(this.$editor.configs.ipCameraList).directionList[3];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "UP",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const upCommandList = this.$config.ipCameraList[1].directionList[3];
+          const upCommandList = this.$editor.configs.ipCameraList[1].directionList[3];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "UP",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
 
       // 摄像头向左按下
       leftMouseDown(){
         if (this.$editor.camera.name == '前摄像头') {
-          const downCommandList = _.first(this.$config.ipCameraList).directionList[0];
+          const downCommandList = _.first(this.$editor.configs.ipCameraList).directionList[0];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "LEFT",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const downCommandList = this.$config.ipCameraList[1].directionList[0];
+          const downCommandList = this.$editor.configs.ipCameraList[1].directionList[0];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "LEFT",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
-      // 摄像头向左抬起
+      // 摄像头向左释放
       leftMouseUp(){
         if (this.$editor.camera.name == '前摄像头') {
-          const upCommandList = _.first(this.$config.ipCameraList).directionList[0];
+          const upCommandList = _.first(this.$editor.configs.ipCameraList).directionList[0];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "LEFT",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const upCommandList = this.$config.ipCameraList[1].directionList[0];
+          const upCommandList = this.$editor.configs.ipCameraList[1].directionList[0];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "LEFT",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
 
       // 摄像头向右按下
       rightMouseDown(){
         if (this.$editor.camera.name == '前摄像头') {
-          const downCommandList = _.first(this.$config.ipCameraList).directionList[1];
+          const downCommandList = _.first(this.$editor.configs.ipCameraList).directionList[1];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "RIGHT",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const downCommandList = this.$config.ipCameraList[1].directionList[1];
+          const downCommandList = this.$editor.configs.ipCameraList[1].directionList[1];
           const downCommand = _.first(downCommandList.commandList);
-          console.log(downCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "RIGHT",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
-      // 摄像头向右抬起
+      // 摄像头向右释放
       rightMouseUp(){
         if (this.$editor.camera.name == '前摄像头') {
-          const upCommandList = _.first(this.$config.ipCameraList).directionList[1];
+          const upCommandList = _.first(this.$editor.configs.ipCameraList).directionList[1];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "RIGHT",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const upCommandList = this.$config.ipCameraList[1].directionList[1];
+          const upCommandList = this.$editor.configs.ipCameraList[1].directionList[1];
           const upCommand = upCommandList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "RIGHT",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
 
@@ -197,55 +484,196 @@
       // 放大焦距按下
       addMouseDown(){
         if (this.$editor.camera.name == '前摄像头') {
-          const focusList = _.first(this.$config.ipCameraList).focusList[0];
-          const upCommand = _.first(focusList.commandList);
-          console.log(upCommand);
+          const focusList = _.first(this.$editor.configs.ipCameraList).focusList[0];
+          const downCommand = _.first(focusList.commandList);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOMI-IN",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const focusList = this.$config.ipCameraList[1].focusList[0];
-          const upCommand = _.first(focusList.commandList);
-          console.log(upCommand);
+          const focusList = this.$editor.configs.ipCameraList[1].focusList[0];
+          const downCommand = _.first(focusList.commandList);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOMI-IN",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
-      // 放大焦距抬起
+      // 放大焦距释放
       addMouseUp(){
         if (this.$editor.camera.name == '前摄像头') {
-          const focusList = _.first(this.$config.ipCameraList).focusList[0];
+          const focusList = _.first(this.$editor.configs.ipCameraList).focusList[0];
           const upCommand = focusList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOMI-IN",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const focusList = this.$config.ipCameraList[1].focusList[0];
+          const focusList = this.$editor.configs.ipCameraList[1].focusList[0];
           const upCommand = focusList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOMI-IN",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
 
       // 缩小焦距按下
       reduceMouseDown(){
         if (this.$editor.camera.name == '前摄像头') {
-          const focusList = _.first(this.$config.ipCameraList).focusList[1];
-          const upCommand = _.first(focusList.commandList);
-          console.log(upCommand);
+          const focusList = _.first(this.$editor.configs.ipCameraList).focusList[1];
+          const downCommand = _.first(focusList.commandList);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOM-OUT",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const focusList = this.$config.ipCameraList[1].focusList[1];
-          const upCommand = _.first(focusList.commandList);
-          console.log(upCommand);
+          const focusList = this.$editor.configs.ipCameraList[1].focusList[1];
+          const downCommand = _.first(focusList.commandList);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOM-OUT",
+            "orders": [
+              downCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
-      // 缩小焦距抬起
+      // 缩小焦距释放
       reduceMouseUp(){
         if (this.$editor.camera.name == '前摄像头') {
-          const focusList = _.first(this.$config.ipCameraList).focusList[1];
+          const focusList = _.first(this.$editor.configs.ipCameraList).focusList[1];
           const upCommand = focusList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOM-OUT",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }else{
-          const focusList = this.$config.ipCameraList[1].focusList[1];
+          const focusList = this.$editor.configs.ipCameraList[1].focusList[1];
           const upCommand = focusList.commandList[1];
-          console.log(upCommand);
+          this.$http.post('/api/controls',{
+            "type": "IPC",
+            "action": "ZOOM-OUT",
+            "orders": [
+              upCommand
+            ]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (result.successful) {
+              this.$message.success(result.message);
+            }else{
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
         }
       },
     },
     mounted(){
-      this.$editor.camera = _.first(this.$config.ipCameraList);
+      this.$http.get('/api/configs')
+      .then(response=>{
+        const result = response.data;
+        this.$editor.camera = _.first(result.data.ipCameraList);
+      })
+      
     }
   }
 </script>

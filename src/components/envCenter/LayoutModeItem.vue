@@ -2,34 +2,37 @@
   <div id="layout-mode-item" v-if="this.modeId == this.id">
     <div class="layout-item-container">
       <template v-for="layer in layerList">
-        <div
+        <Layer
+          :screenListId="screenListId"
           :id="layer.id"
           :key="layer.id"
-          :style="{
-            left: (layer.left/65536) *420 + 'px',
-            top: (layer.top/65536)* 110+ 'px',
-            width: (layer.width/65536)*420 + 'px',
-            height: (layer.height/65536)*110 + 'px',
-          }"
-        >
-        </div>
+          :left="layer.left"
+          :top="layer.top"
+          :width="layer.width"
+          :height="layer.height"
+        />
       </template>
     </div>
   </div>
 </template>
   
 <script type="text/ecmascript-6">
+  import Layer from './Layer';
   export default {
-    props:['id','layerList'],
+    props:['id','layerList','screenListId'],
     data(){
       return{
         modeId:1,
+        compiled:"",
       }
+    },
+    components:{
+      Layer
     },
     mounted(){
       this.$events.on('selectedMode',({id})=>{
         this.modeId = id;
-      })
+      });
     }
   }
 </script>
@@ -48,8 +51,5 @@
     height: 110px;
     position: relative;
   }
-  #layout-mode-item .layout-item-container div{
-    position: absolute;
-    border:1px solid #666;
-  }
+  
 </style>

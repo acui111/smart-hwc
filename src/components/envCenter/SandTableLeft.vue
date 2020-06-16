@@ -1,14 +1,16 @@
 <template>
   <div class="table-left">
-    <div class="seat-item draggable">
+    <div class="seat-item">
       <img
         src="/image/envImg/screen_home.png"
         ref="left-screen-home1"
+        class="draggable"
         alt="主屏"
         />
       <img
         src="/image/envImg/screen_vice.png"
         ref="left-screen-vice1"
+        class="draggable"
         alt="副屏"
         />
     </div>
@@ -17,11 +19,13 @@
       <img
         src="/image/envImg/screen_home.png"
         ref="left-screen-home2"
+        class="draggable"
         alt="主屏"
         />
       <img
         src="/image/envImg/screen_vice.png"
         ref="left-screen-vice2"
+        class="draggable"
         alt="副屏"
         />
     </div>
@@ -68,10 +72,24 @@
       })
       .on("move", (ev) => {
         if (ev.interaction.pointerIsDown && !ev.interaction.interacting()) {
-          const leftSeat = this.$config.seatList[1];
+          const leftSeat = this.$editor.configs.seatList[1];
           const obj = _.first(leftSeat);
-          const first = _.first(obj.commandList);
-          console.log('开始托拽主屏',first);
+          const proxy = ev.target.cloneNode(true);
+          proxy.style.position = "absolute";
+          proxy.style.left = (ev.clientX - ev.target.offsetWidth / 2) + "px";
+          proxy.style.top = (ev.clientY - ev.target.offsetHeight / 2) + "px";
+          proxy.style.width = ev.target.offsetWidth + "px";
+          proxy.style.height = ev.target.offsetHeight + "px";
+          proxy.style.touchAction = 'none';
+          proxy.setAttribute("id",this.id);
+          proxy.setAttribute('commandList',_.first(obj.commandList));
+          document.body.appendChild(proxy);
+          proxy.setAttribute("proxy",true);
+          ev.interaction.start(
+            {name: 'drag'},
+            ev.interactable,
+            proxy
+          );
         }
       })
       .on("down", (ev)=>{})
@@ -112,10 +130,24 @@
       })
       .on("move", (ev) => {
         if (ev.interaction.pointerIsDown && !ev.interaction.interacting()) {
-          const leftSeat = this.$config.seatList[1];
+          const leftSeat = this.$editor.configs.seatList[1];
           const obj = _.first(leftSeat);
-          const second = obj.commandList[1];
-          console.log('开始托拽副屏',second);
+          const proxy = ev.target.cloneNode(true);
+          proxy.style.position = "absolute";
+          proxy.style.left = (ev.clientX - ev.target.offsetWidth / 2) + "px";
+          proxy.style.top = (ev.clientY - ev.target.offsetHeight / 2) + "px";
+          proxy.style.width = ev.target.offsetWidth + "px";
+          proxy.style.height = ev.target.offsetHeight + "px";
+          proxy.style.touchAction = 'none';
+          proxy.setAttribute("id",this.id);
+          proxy.setAttribute('commandList',obj.commandList[1]);
+          document.body.appendChild(proxy);
+          proxy.setAttribute("proxy",true);
+          ev.interaction.start(
+            {name: 'drag'},
+            ev.interactable,
+            proxy
+          );
         }
       })
       .on("down", (ev)=>{})
@@ -156,9 +188,24 @@
       })
       .on("move", (ev) => {
         if (ev.interaction.pointerIsDown && !ev.interaction.interacting()) {
-          const leftSeat = this.$config.seatList[1];
-          const first = _.first(leftSeat[1].commandList);
-          console.log('开始托拽主屏',first);
+          const leftSeat = this.$editor.configs.seatList[1];
+          const obj = _.first(leftSeat);
+          const proxy = ev.target.cloneNode(true);
+          proxy.style.position = "absolute";
+          proxy.style.left = (ev.clientX - ev.target.offsetWidth / 2) + "px";
+          proxy.style.top = (ev.clientY - ev.target.offsetHeight / 2) + "px";
+          proxy.style.width = ev.target.offsetWidth + "px";
+          proxy.style.height = ev.target.offsetHeight + "px";
+          proxy.style.touchAction = 'none';
+          proxy.setAttribute("id",this.id);
+          proxy.setAttribute('commandList',_.first(leftSeat[1].commandList));
+          document.body.appendChild(proxy);
+          proxy.setAttribute("proxy",true);
+          ev.interaction.start(
+            {name: 'drag'},
+            ev.interactable,
+            proxy
+          );
         }
       })
       .on("down", (ev)=>{})
@@ -199,9 +246,23 @@
       })
       .on("move", (ev) => {
         if (ev.interaction.pointerIsDown && !ev.interaction.interacting()) {
-          const leftSeat = this.$config.seatList[1];
-          const second = leftSeat[1].commandList[1];
-          console.log('开始托拽副屏',second);
+          const leftSeat = this.$editor.configs.seatList[1];
+          const proxy = ev.target.cloneNode(true);
+          proxy.style.position = "absolute";
+          proxy.style.left = (ev.clientX - ev.target.offsetWidth / 2) + "px";
+          proxy.style.top = (ev.clientY - ev.target.offsetHeight / 2) + "px";
+          proxy.style.width = ev.target.offsetWidth + "px";
+          proxy.style.height = ev.target.offsetHeight + "px";
+          proxy.style.touchAction = 'none';
+          proxy.setAttribute("id",this.id);
+          proxy.setAttribute('commandList',leftSeat[1].commandList[1]);
+          document.body.appendChild(proxy);
+          proxy.setAttribute("proxy",true);
+          ev.interaction.start(
+            {name: 'drag'},
+            ev.interactable,
+            proxy
+          );
         }
       })
       .on("down", (ev)=>{})

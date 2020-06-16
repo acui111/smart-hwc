@@ -1,16 +1,16 @@
 <template>
   <div class="column-item" :id="id">
     <img
-      v-if="volState == 0"
+      v-if="this.value == 100"
       class="vol"
-      src="/image/icon_mc.png" 
+      src="/image/icon_mc_s.png" 
       alt="全音"
       @click="vol"
       >
     <img
-      v-else-if="volState == 1"
+      v-else
       class="vol"
-      src="/image/icon_mc_s.png" 
+      src="/image/icon_mc.png" 
       alt="全音"
       @click="vol"
       >
@@ -19,25 +19,25 @@
       ref="processRange"
       class="progress" 
       type="range" 
-      :value="processPoint" 
+      :value="value" 
       :max ="duration" 
       min ="0" 
       step="1" 
-      @input = "changeProcess(id)" 
-      :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ processPoint*100/duration +'% 100% no-repeat'}
+      @input = "changeProcess" 
+      :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
       "
       />
     <img
-      v-if="muteState == 0"
+      v-if="this.value == 0"
       class="zero"
-      src="/image/icon_mute.png" 
+      src="/image/icon_mute_s.png" 
       alt="静音"
       @click="zero"
       >
     <img
-      v-else-if="muteState == 1"
+      v-else
       class="zero"
-      src="/image/icon_mute_s.png" 
+      src="/image/icon_mute.png" 
       alt="静音"
       @click="zero"
       >
@@ -48,64 +48,51 @@
 <script type="text/ecmascript-6">
   export default {
     name:'ColumnItem',
-    props:['id','name',"value"],
+    props:['id','name',"value","commandList"],
     data(){
       return{
-        processPoint:this.value,
         //音量控制范围
         duration:'100', 
         // 控制静音的显示状态
         muteState:0,
         //控制全音的显示状态
         volState:0,
+        // 指令
+        compiled:[],
       }
     },
     methods: {
       //滑动滑块
-      changeProcess(id){
+      changeProcess(){
         var range = this.$refs.processRange;
-        this.processPoint = range.value;
-        this.judgeState();
-        this.$events.emit('changeVol',{id,vol:this.processPoint});
-        //实时改变每一项的声音
-        // console.log(this.processPoint);
+        this.$events.emit('changeVol',{id:this.id,vol:range.value});
+        let compiled = _.template(this.commandList);
+        this.compiled = compiled({
+          volume : Number(this.processPoint).toString(16),
+        });
+        this.$http.post('/api/controls',{
+          "type": "VOLUME",
+          "action": "SET",
+          "orders": this.compiled
+        })
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
       //100%
       vol(){
-        this.processPoint = this.duration;
-        if (this.volState == 0) {
-          this.volState = 1;
-          this.muteState = 0;
-        }else{
-          this.volState = 0;
-        }
+        this.$events.emit('changeVol',{id:this.id,vol:100});
       },
       //静音
       zero(){
-        this.processPoint = 0;
-        if (this.muteState == 0) {
-          this.muteState = 1;
-          this.volState = 0;
-        }else{
-          this.muteState = 0;
-        }
+        this.$events.emit('changeVol',{id:this.id,vol:0});
       },
-      //判断音量按钮显示状态
-      judgeState(){
-        if(this.processPoint == this.duration){
-          // 全音(100%)
-          this.volState = 1;
-          this.muteState = 0;
-        }else if(this.processPoint == 0){
-          // 静音(等于0)
-          this.volState = 0;
-          this.muteState = 1;
-        }else{
-          // (0-100%中间)
-          this.muteState = 0;
-          this.volState = 0;
-        }
-      }
     },
     mounted(){
       // console.log('切换模式',this.value);

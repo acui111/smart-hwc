@@ -1,6 +1,6 @@
 <template>
   <div id="mode-list">
-    <template v-for="(volumeMode,index) in this.$config.volumeModeList">
+    <template v-for="(volumeMode,index) in this.$editor.configs.volumeModeList">
       <div
         :id="volumeMode.id" 
         @click="selectMode(volumeMode.id,volumeMode.name)"
@@ -26,6 +26,7 @@
     },
     methods: {
       selectMode(id,name){
+        // 切换模式
         this.$events.emit('editButtonShow',{state:1,id,name});
         this.$events.emit('selectedModeId',{id});
         this.isActive = id;

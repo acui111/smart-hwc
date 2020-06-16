@@ -2,7 +2,7 @@
   <!-- 固定模式 -->
   <div id='fixed-mode'>
     <div class="mode-list">
-      <template v-for="(fixdMode,index) in this.$config.fixedModeList" >
+      <template v-for="(fixdMode,index) in this.$editor.configs.fixedModeList" >
         <div
           id="mode-item" 
           @click="selectMode(fixdMode.id,fixdMode.commandList)"
@@ -30,7 +30,22 @@
     methods: {
       selectMode(id,commandList){
         this.isActive = id ;
-        console.log('点击发送的指令',commandList);
+        this.$http.post('/api/controls',{
+          "type": "MODE",
+          "action": "SELECT",
+          "orders": commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }else{
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       }
     },
   }

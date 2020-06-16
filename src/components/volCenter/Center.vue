@@ -37,7 +37,7 @@
           <!-- 修改名称 -->
           <img @click="editModeName" class='edit-mode' src="/image/edit.png" alt="修改名称">
           <!-- 保存在本模式 -->
-          <img class='save-to-mode' src="/image/save_to_mode.png" alt="保存在本模式">
+          <img @click="save" class='save-to-mode' src="/image/icon.png" alt="保存">
         </div>
 
         <!-- 选择模式 -->
@@ -59,6 +59,7 @@ import Equipments from '../envCenter/Equipments';
 import TableList from '../envCenter/TableList';
 import SandTable from '../envCenter/SandTable';
 import EditModal from './EditModal';
+import _ from 'lodash';
   export default {
     name:'Center',
     components:{
@@ -81,6 +82,7 @@ import EditModal from './EditModal';
         modeName:'',
         //模式的id
         modeId:0,
+        volumeList:[],
       }
     },
     methods:{
@@ -94,10 +96,26 @@ import EditModal from './EditModal';
           this.audio = 1;
         }
       },
-      //将模式另存为
+      //保存模式
       save(){
-        // 显示另存为
-        this.$events.emit('saveMode',{state:true});
+        const volumeModeList = _.map(this.$editor.configs.volumeModeList,(volumeMode)=>{
+          if (volumeMode.id == this.modeId) {
+            volumeMode.volumeList[0] = this.$editor.allVol;
+            volumeMode.volumeList[1] = this.$editor.columnList;
+          }
+          return volumeMode;
+        })
+        this.$editor.configs.volumeModeList = volumeModeList;
+        this.$http.put('/api/configs',this.$editor.configs)
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
       //修改名称
       editModeName(){
@@ -106,22 +124,54 @@ import EditModal from './EditModal';
       },
       // 大屏开
       screenOpen(){
-        const screenList = _.first(this.$config.screenList);
+        const screenList = _.first(this.$editor.configs.screenList);
         const first = _.first(screenList.commandList);
-        console.log('大屏',first);
+        this.$http.post('/api/controls',{
+          "type": "POWER",
+          "action": "ON",
+          "orders": [
+            first
+          ]
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
       // 大屏关
       screenClose(){
-        const screenList = _.first(this.$config.screenList);
+        const screenList = _.first(this.$editor.configs.screenList);
         const second = screenList.commandList[1];
-        console.log('大屏',second);
+        this.$http.post('/api/controls',{
+          "type": "POWER",
+          "action": "OFF",
+          "orders": [
+            second
+          ]
+        })
+        .then(response=>{
+          const result = response.data;
+          if (result.successful) {
+            this.$message.success(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       }
     },
     mounted(){
-      // 接收是否展示(除另存为)的按钮
+      // 接收切换模式的信息
       this.$events.on('editButtonShow',({state,id,name})=>{
         this.editButtonShow = state;
+        this.modeId = id;
         this.modeName = name;
+        console.log(this.modeName);
       })
     }
   }
