@@ -35,6 +35,13 @@
       @click="zero"
       >
     <img
+      v-else-if="this.muteStatus == 1"
+      class="zero"
+      src="/image/icon_mute_s.png" 
+      alt="静音"
+      @click="zero"
+      >
+    <img
       v-else
       class="zero"
       src="/image/icon_mute.png" 
@@ -56,6 +63,8 @@
         muteState:0,
         //控制全音的显示状态
         volState:0,
+        // 点击静音高亮状态
+        muteStatus:0,
       }
     },
     methods: {
@@ -63,7 +72,7 @@
       changeProcess(){
         var range = this.$refs.processRange;
         this.$events.emit('changeAllVol',{id:this.id,vol:range.value});
-        let compiled = _.template(this.commandList);
+        let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
           volume : Number(this.value).toString(16),
         });
@@ -71,7 +80,7 @@
         this.$http.post('/api/controls',{
           "type": "VOLUME",
           "action": "SET",
-          "orders": this.compiled
+          "orders": [this.compiled]
         })
         .then(response=>{
           const result = response.data;
@@ -89,7 +98,54 @@
       },
       //静音
       zero(){
-        this.$events.emit('changeAllVol',{id:this.id,vol:0});
+        // 当前静音状态
+        if (this.muteStatus == 1) {
+          // 发送取消静音的指令
+          let compiled = _.template(this.commandList[2]);
+          this.compiled = compiled({
+            volume : Number(this.value).toString(16),
+          });
+          console.log(this.compiled);
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+            this.muteStatus = 0;
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
+        // 不是静音状态
+        else{
+          // 发送静音的指令
+          let compiled = _.template(this.commandList[1]);
+          this.compiled = compiled({
+            volume : Number(this.value).toString(16),
+          });
+          console.log(this.compiled);
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+            this.muteStatus = 1;
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
       },
     },
     mounted(){
