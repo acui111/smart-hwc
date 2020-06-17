@@ -153,7 +153,6 @@
       },
     },
     mounted(){
-      console.log('=====',this.muteStatus);
       if (this.value == 100) {
         this.volState = 1 ;
       }else if(this.value == 0){

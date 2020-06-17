@@ -35,6 +35,13 @@
       @click="zero"
       >
     <img
+      v-else-if="this.muteStatus == 1"
+      class="zero"
+      src="/image/icon_mute_s.png" 
+      alt="静音"
+      @click="zero"
+      >
+    <img
       v-else
       class="zero"
       src="/image/icon_mute.png" 
@@ -56,6 +63,8 @@
         muteState:0,
         //控制全音的显示状态
         volState:0,
+        // 点击静音高亮状态
+        muteStatus:0,
       }
     },
     methods: {
@@ -90,7 +99,7 @@
       //静音
       zero(){
         // 当前静音状态
-        if (this.value == 0) {
+        if (this.muteStatus == 1) {
           // 发送取消静音的指令
           let compiled = _.template(this.commandList[2]);
           this.compiled = compiled({
@@ -107,7 +116,7 @@
             if (!result.successful) {
               this.$message.error(result.message);
             }
-            this.$events.emit('changeAllVol',{id:this.id,vol:50});
+            this.muteStatus = 0;
           })
           .catch(error=>{
             this.$message.error(error.response.data.message);
@@ -131,7 +140,7 @@
             if (!result.successful) {
               this.$message.error(result.message);
             }
-            this.$events.emit('changeAllVol',{id:this.id,vol:0});
+            this.muteStatus = 1;
           })
           .catch(error=>{
             this.$message.error(error.response.data.message);
