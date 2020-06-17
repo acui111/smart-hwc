@@ -68,8 +68,9 @@
         this.$events.emit('changeVol',{id:this.id,vol:range.value});
         let compiled = _.template(this.commandList);
         this.compiled = compiled({
-          volume : Number(this.processPoint).toString(16),
+          volume : Number(this.value).toString(16),
         });
+        // console.log(this.compiled);
         this.$http.post('/api/controls',{
           "type": "VOLUME",
           "action": "SET",
@@ -95,7 +96,6 @@
       },
     },
     mounted(){
-      // console.log('切换模式',this.value);
       if (this.value == 100) {
         this.volState = 1 ;
       }else if(this.value == 0){
