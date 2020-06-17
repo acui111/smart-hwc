@@ -81,7 +81,5 @@
 </script>
   
 <style scoped>
-  .drop-active{
-    border:'2px solid #fff';
-  }
+  
 </style>
