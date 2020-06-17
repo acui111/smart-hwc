@@ -3,7 +3,7 @@
   <div id="equipments">
     <!-- 前摄像头与空调 -->
     <div class="equipment-header">
-      <img style="width:50px;height:49px" src="/image/envImg/icon1.png" alt="前摄像头" @click="switchCamera">
+      <FrontCamera/>
       <div class="air-conditioner">
         <img style="width:36px;height:44px" class="air1" src="/image/envImg/icon2.png" alt="空调1">
         <img style="width:36px;height:44px" src="/image/envImg/icon2.png" alt="空调2">
@@ -22,29 +22,12 @@
   
 <script type="text/ecmascript-6">
   import LayoutModeList from './LayoutModeList';
+  import FrontCamera from './FrontCamera';
   export default {
     components:{
-      LayoutModeList
+      LayoutModeList,
+      FrontCamera
     },
-    methods: {
-      switchCamera(){
-        this.$editor.camera = _.first(this.$editor.configs.ipCameraList);
-        this.$http.post('/api/controls',{
-          "type": "IPC",
-          "action": "SELECT",
-          "orders": this.$editor.camera.commandList
-        })
-        .then(response=>{
-          const result = response.data;
-          if (!result.successful) {
-            this.$message.error(result.message);
-          }
-        })
-        .catch(error=>{
-          this.$message.error(error.response.data.message);
-        })
-      }
-    }
   }
 </script>
   

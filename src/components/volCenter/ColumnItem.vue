@@ -56,6 +56,7 @@
 </template>
   
 <script type="text/ecmascript-6">
+  import _ from 'lodash';
   export default {
     name:'ColumnItem',
     props:['id','name',"value","commandList"],
@@ -80,7 +81,7 @@
         this.$events.emit('changeVol',{id:this.id,vol:range.value});
         let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
-          volume : Number(this.value).toString(16),
+          volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
         });
         const rangeValue = (range.value) % 10;
         if (rangeValue == 0) {
@@ -106,7 +107,7 @@
         this.$events.emit('changeVol',{id:this.id,vol:range.value});
         let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
-          volume : Number(this.value).toString(16),
+          volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
         });
         this.$http.post('/api/controls',{
           "type": "VOLUME",
@@ -134,7 +135,7 @@
           // 发送取消静音的指令
           let compiled = _.template(this.commandList[2]);
           this.compiled = compiled({
-            volume : Number(this.value).toString(16),
+            volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
           });
           console.log(this.compiled);
           this.$http.post('/api/controls',{
@@ -158,7 +159,7 @@
           // 发送静音的指令
           let compiled = _.template(this.commandList[1]);
           this.compiled = compiled({
-            volume : Number(this.value).toString(16),
+            volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
           });
           console.log(this.compiled);
           this.$http.post('/api/controls',{
