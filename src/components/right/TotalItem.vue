@@ -14,22 +14,12 @@
       alt="全音"
       @click="vol"
       >
-    <div :title="title">
-      <input
-        :id="id"
-        ref="processRange"
-        class="progress" 
-        type="range" 
-        :value="value" 
-        :max ="duration" 
-        min ="0" 
-        step="1" 
-        @input = "changeProcess"
-        @mouseup="mouseup"
-        :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
-        "
+    <a-slider 
+      vertical 
+      :default-value='value'
+      @change = 'changeProcess'
+      @afterChange = 'mouseup'
       />
-    </div>
     <img
       v-if="this.value == 0"
       class="zero"
@@ -74,14 +64,14 @@
     },
     methods: {
       //滑动滑块
-      changeProcess(){
+      changeProcess(value){
         var range = this.$refs.processRange;
-        this.$events.emit('changeAllVol',{id:this.id,vol:range.value});
+        this.$events.emit('changeAllVol',{id:this.id,vol:value});
         let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
           volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
         });
-        const rangeValue = (range.value) % 10;
+        const rangeValue = (value) % 10;
         if (rangeValue == 0) {
           this.$http.post('/api/controls',{
             "type": "VOLUME",
@@ -100,9 +90,9 @@
         }
       },
       // 鼠标抬起
-      mouseup(){
+      mouseup(value){
         var range = this.$refs.processRange;
-        this.$events.emit('changeAllVol',{id:this.id,vol:range.value});
+        this.$events.emit('changeAllVol',{id:this.id,vol:value});
         let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
           volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
@@ -196,19 +186,46 @@
     position: relative;
     overflow: hidden;
   }
-  /* 滑动条 */
-  .total-item .progress{
-    -webkit-appearance: none;
-    transform:rotate(270deg);
-    width: 135px;
-    height: 7px;
-    border-radius: 4px;
-    outline: none;
+  /deep/ .ant-slider-vertical{
+    width: 20px;
+    height: 165px;
+    padding:0;
+    margin:0;
     position:absolute;
     left: 50%;
     top: 50%;
-    margin-left: -62px;
-    margin-top: -3px;
+    margin-left: -3px;
+    margin-top: -84px;
+  }
+  /deep/ .ant-slider-vertical .ant-slider-rail{
+    width: 6px;
+    height: 100%;
+  }
+  /deep/ .ant-slider-rail{
+    background-color:rgba(0,0,0,0.1);
+  }
+  /deep/ .ant-slider:hover .ant-slider-rail{
+    background-color:rgba(0,0,0,0.1);
+  }
+  /deep/ .ant-slider-vertical .ant-slider-step{
+    width: 6px;
+    height: 100%;
+  }
+  
+  /deep/ .ant-slider-handle{
+    width: 16px;
+    height: 24px;
+    background-image: url(/image/vol.png);
+    background-size: 100% 100%;
+    border-radius:0%;
+    border:none;
+    background-color: rgba(255,255,255,0);
+  }
+  /deep/ .ant-slider-vertical .ant-slider-track{
+    width: 6px;
+  }
+  /deep/ .ant-slider-track{
+    background-color:rgb(12, 179, 185);
   }
   /* 全音 */
   .vol{
@@ -217,7 +234,8 @@
     position:absolute;
     left: 50%;
     top: 15%;
-    margin-top: -2px;
+    margin-left: -6px;
+    margin-top: -12px;
   }
   /* 静音 */
   .zero{
@@ -226,6 +244,7 @@
     position:absolute;
     left: 50%;
     top: 84%;
+    margin-left: -6px;
     margin-top: -2px;
   }
   /* 音柱名 */
@@ -236,26 +255,5 @@
     color:#ffffff;
     left: 32%;
     top: 90%;
-  }
-  /*input外壳样式*/
-  input[type=range] {
-    -webkit-appearance: none;
-    border-radius: 10px;
-    height: 7px;
-  }
-  /*轨道*/
-  input[type=range]::-webkit-slider-runnable-track {
-    height: 5px;
-    background: rgba(0,0,0,0.1);
-    border-radius: 10px;
-  }
-  /*滑块*/
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width:24px;
-    height: 13px;
-    margin-top: -4px;
-    background-image: url(/image/vol.png);
-    background-size: 100% 100%;
   }
 </style>
