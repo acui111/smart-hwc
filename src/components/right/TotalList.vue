@@ -6,7 +6,7 @@
         :key="index"
         :id="totalItem.id"
         :name="totalItem.name"
-        :value="totalItem.value"
+        :value="Number(totalItem.value)"
         :commandList="totalItem.commandList"
       />
     </template>

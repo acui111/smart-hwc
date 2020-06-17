@@ -6,7 +6,7 @@
         :key="index"
         :id="column.id"
         :name="column.name"
-        :value="column.value"
+        :value="Number(column.value)"
         :commandList="column.commandList"
       />
     </template>
