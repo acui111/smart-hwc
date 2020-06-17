@@ -20,8 +20,6 @@
         <img style="width:50px;height:48px" src="/image/envImg/icon9.png" alt="后摄像头" @click="switchCamera">
       </div>
     </div>
-    <!-- 导播 -->
-    <VolTable/>
   </div>
 </template>
   
@@ -30,14 +28,12 @@ import ElectronicTable from './ElectronicTable';
 import SandTableLeft from './SandTableLeft';
 import SandTableRight from './SandTableRight';
 import LeaderTable from './LeaderTable';
-import VolTable from './VolTable';
   export default {
     components:{
       ElectronicTable,
       SandTableLeft,
       SandTableRight,
       LeaderTable,
-      VolTable
     },
     methods:{
       switchCamera(){

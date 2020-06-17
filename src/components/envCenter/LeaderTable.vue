@@ -15,7 +15,7 @@
         alt="副屏"
         />
     </div>
-    <div class="name">领导1</div>
+    <div class="name">{{leftName}}</div>
     </div>
     <div>
       <div class="seat-item draggable">
@@ -32,7 +32,7 @@
         alt="副屏"
         />
     </div>
-    <div class="name">领导2</div>
+    <div class="name">{{rightName}}</div>
     </div>
   </div>
 </template>
@@ -40,7 +40,19 @@
 <script type="text/ecmascript-6">
   import interact from 'interactjs';
   export default {
+    data(){
+      return{
+        leftName:"",
+        rightName:'',
+      }
+    },
     mounted(){
+      this.$http.get('/api/configs')
+      .then(response=>{
+        const result = response.data;
+        this.leftName = _.first(result.data.seatList[3]).name;
+        this.rightName = result.data.seatList[3][1].name;
+      })
       // 沙盘领导坐席(1)的主屏拖拽
       interact(this.$refs["leader-screen-home1"])
       .draggable({

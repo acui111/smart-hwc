@@ -1,14 +1,7 @@
 <template>
   <div 
     ref="layout-mode-item"
-    :style="{
-      left: (left/65536) *420 + 'px',
-      top: (top/65536)* 110+ 'px',
-      width: (width/65536)*420 + 'px',
-      height: (height/65536)*110 + 'px',
-      position: 'absolute',
-      border:'1px solid #666',
-    }"
+    :style="style"
     >
 
   </div>
@@ -18,6 +11,18 @@
   import interact from 'interactjs';
   export default {
     props:['id','left','top','width','height','layoutId','screenListId'],
+    data(){
+      return{
+        style:{
+          left: (this.left/65536) *420 + 'px',
+          top: (this.top/65536)* 110+ 'px',
+          width: (this.width/65536)*420 + 'px',
+          height: (this.height/65536)*110 + 'px',
+          position: 'absolute',
+          border:'1px solid #666',
+        }
+      }
+    },
     mounted(){
       // 接收拖拽
       interact(this.$refs['layout-mode-item']).dropzone({
@@ -27,20 +32,19 @@
         },
 
         ondragenter: (ev) => {
-          this.$refs['layout-mode-item'].style.border = '2px solid #fff';
+          this.style.border = '2px solid #fff';
         },
 
         ondragleave: (ev) => {
-          this.$refs['layout-mode-item'].style.border = '1px solid #666';
+          this.style.border = '1px solid #666';
         },
 
         ondrop: (ev) => {
-          const currentTarget = ev.currentTarget;
           const relatedTarget = ev.relatedTarget;
-          const left = (parseInt(currentTarget.style.left)/420)*65536;
-          const top = (parseInt(currentTarget.style.top)/110)*65536;
-          const width = (parseInt(currentTarget.style.width)/420)*65536;
-          const height = (parseInt(currentTarget.style.height)/110)*65536;
+          const left = this.left;
+          const top = this.top;
+          const width = this.width;
+          const height = this.height;
           const commandList = ev.relatedTarget.getAttribute("commandList");
           let compiled = _.template(commandList);
           this.compiled =  compiled({
@@ -69,7 +73,7 @@
           })
         },
         ondropdeactivate: (ev) => {
-          this.$refs['layout-mode-item'].style.border = '1px solid #666';
+          this.style.border = '1px solid #666';
         },
       });
     }
@@ -77,5 +81,7 @@
 </script>
   
 <style scoped>
-  
+  .drop-active{
+    border:'2px solid #fff';
+  }
 </style>

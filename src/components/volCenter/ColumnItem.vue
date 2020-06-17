@@ -25,7 +25,8 @@
       :max ="duration" 
       min ="0" 
       step="1" 
-      @input = "changeProcess" 
+      @input = "changeProcess"
+      @mouseup="mouseup"
       :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
       "
       />
@@ -75,6 +76,32 @@
     methods: {
       //滑动滑块
       changeProcess(){
+        var range = this.$refs.processRange;
+        this.$events.emit('changeVol',{id:this.id,vol:range.value});
+        let compiled = _.template(_.first(this.commandList));
+        this.compiled = compiled({
+          volume : Number(this.value).toString(16),
+        });
+        const rangeValue = (range.value) % 10;
+        if (rangeValue == 0) {
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
+      },
+      // 鼠标抬起
+      mouseup(){
         var range = this.$refs.processRange;
         this.$events.emit('changeVol',{id:this.id,vol:range.value});
         let compiled = _.template(_.first(this.commandList));

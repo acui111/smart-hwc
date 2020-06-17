@@ -3,6 +3,7 @@
   <div 
     class="sand-table"
     ref="sand-table"
+    :style="style"
     >
     <img style="width:172px;height:111px" src="/image/envImg/sand_table.png" alt="电子沙盘">
   </div>
@@ -14,6 +15,10 @@ import interact from 'interactjs';
     data(){
       return{
         screenListId:null,
+        layerList:[],
+        style:{
+          border:'',
+        }
       }
     },
     mounted(){
@@ -25,20 +30,19 @@ import interact from 'interactjs';
         },
 
         ondragenter: (ev) => {
-          this.$refs['sand-table'].style.border = '2px solid #fff';
+          this.style.border = '2px solid #fff';
         },
 
         ondragleave: (ev) => {
-          this.$refs['sand-table'].style.border = 'none';
+          this.style.border = '';
         },
 
         ondrop: (ev) => {
-          const currentTarget = ev.currentTarget;
           const relatedTarget = ev.relatedTarget;
-          const left = 65536;
-          const top = 65536;
-          const width = 65536;
-          const height = 65536;
+          const left = this.layerList.left;
+          const top = this.layerList.top;
+          const width = this.layerList.width;
+          const height = this.layerList.height;
           const commandList = ev.relatedTarget.getAttribute("commandList");
           let compiled = _.template(commandList);
           this.compiled =  compiled({
@@ -67,7 +71,7 @@ import interact from 'interactjs';
           })
         },
         ondropdeactivate: (ev) => {
-          this.$refs['sand-table'].style.border = 'none';
+          this.style.border = '';
         },
       });
       // 获取配置
@@ -75,6 +79,8 @@ import interact from 'interactjs';
       .then(response=>{
         const result = response.data;
         const screenList = result.data.screenList[1];
+        const sceneList = _.first(screenList.sceneList);
+        this.layerList = _.first(sceneList.layerList);
         this.screenListId = screenList.id;
       })
       .catch(error=>{
