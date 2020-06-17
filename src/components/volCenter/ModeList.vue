@@ -43,7 +43,7 @@
           });
           this.commandList.push(commandList);
         })
-        console.log(this.commandList);
+        // console.log(this.commandList);
         this.$http.post('/api/controls',{
           "type": "VOLUME",
           "action": "SET",
