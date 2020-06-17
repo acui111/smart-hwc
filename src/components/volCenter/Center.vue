@@ -112,6 +112,8 @@ import _ from 'lodash';
           if (!result.successful) {
             this.$message.error(result.message);
           }
+          console.log(this.$editor.columnList);
+          console.log(this.$editor.allVol);
         })
         .catch(error=>{
           this.$message.error(error.response.data.message);
@@ -167,6 +169,19 @@ import _ from 'lodash';
             second
           ]
         })
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
+      },
+      // 获取所有配置
+      getConfig(){
+        this.$http.get('/api/configs')
         .then(response=>{
           const result = response.data;
           if (!result.successful) {

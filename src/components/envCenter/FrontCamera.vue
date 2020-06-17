@@ -58,7 +58,7 @@
           proxy.style.height = ev.target.offsetHeight + "px";
           proxy.style.touchAction = 'none';
           proxy.setAttribute("id",this.id);
-          proxy.setAttribute('commandList',this.$editor.camera.commandList[1]);
+          proxy.setAttribute('commandList',_.first(this.$editor.configs.ipCameraList).commandList[1]);
           document.body.appendChild(proxy);
           proxy.setAttribute("proxy",true);
           ev.interaction.start({name: 'drag'},

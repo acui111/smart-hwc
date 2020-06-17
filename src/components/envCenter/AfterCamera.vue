@@ -14,7 +14,7 @@
 <script type="text/ecmascript-6">
   import interact from 'interactjs';
   export default {
-     methods:{
+    methods:{
       switchCamera(){
         this.$editor.camera = this.$editor.configs.ipCameraList[1];
         const commandList = _.first(this.$editor.camera.commandList);
@@ -76,7 +76,7 @@
           proxy.style.height = ev.target.offsetHeight + "px";
           proxy.style.touchAction = 'none';
           proxy.setAttribute("id",this.id);
-          proxy.setAttribute('commandList',this.$editor.camera.commandList[1]);
+          proxy.setAttribute('commandList',this.$editor.configs.ipCameraList[1].commandList[1]);
           document.body.appendChild(proxy);
           proxy.setAttribute("proxy",true);
           ev.interaction.start({name: 'drag'},
