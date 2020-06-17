@@ -145,7 +145,6 @@
               this.$message.error(result.message);
             }
             this.muteStatus = 1;
-            this.$refs['processRange'].disabled = 'disabled';
           })
           .catch(error=>{
             this.$message.error(error.response.data.message);
