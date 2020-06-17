@@ -145,6 +145,19 @@ import _ from 'lodash';
       },
       // 大屏关
       screenClose(){
+        let _this = this;
+        _this.$confirm({
+          title: '大屏即将关闭，是否继续',
+          content: h => <div style="color:red;">操作提示</div>,
+          okText: '继续',
+          okType: 'danger',
+          cancelText: '取消',
+          onOk() {
+            _this.close();
+          }
+        })
+      },
+      close(){
         const screenList = _.first(this.$editor.configs.screenList);
         const second = screenList.commandList[1];
         this.$http.post('/api/controls',{
