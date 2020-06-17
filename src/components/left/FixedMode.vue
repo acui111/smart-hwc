@@ -30,22 +30,49 @@
     methods: {
       selectMode(id,commandList){
         this.isActive = id ;
-        this.$http.post('/api/controls',{
-          "type": "MODE",
-          "action": "SELECT",
-          "orders": commandList
-        })
-        .then(response=>{
-          const result = response.data;
-          if (!result.successful) {
-            this.$message.error(result.message);
-          }
-        })
-        .catch(error=>{
-          this.$message.error(error.response.data.message);
-        })
-      }
-    },
+        if (id !== 2) {
+          this.$http.post('/api/controls',{
+            "type": "MODE",
+            "action": "SELECT",
+            "orders": commandList
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }else{
+          let _this = this;
+          _this.$confirm({
+            title: '所有设备将关闭，是否继续',
+            content: h => <div style="color:red;">操作提示</div>,
+            okText: '继续',
+            okType: 'danger',
+            cancelText: '取消',
+            onOk() {
+              _this.$http.post('/api/controls',{
+                "type": "MODE",
+                "action": "SELECT",
+                "orders": commandList
+              })
+              .then(response=>{
+                const result = response.data;
+                if (!result.successful) {
+                  _this.$message.error(result.message);
+                }
+              })
+              .catch(error=>{
+                _this.$message.error(error.response.data.message);
+              })
+            }
+          })
+        }
+      },
+    }
   }
 </script>
   

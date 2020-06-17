@@ -14,20 +14,25 @@
       alt="全音"
       @click="vol"
       >
-    <input 
-      :id="id"
-      ref="processRange"
-      class="progress" 
-      type="range" 
-      :value="value" 
-      :max ="duration" 
-      min ="0" 
-      step="1" 
-      @input = "changeProcess"
-      @mouseup="mouseup"
-      :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
-      "
+    <a-tooltip>
+      <template slot='title'>
+        {{value}}%
+      </template>
+      <input
+        :id="id"
+        ref="processRange"
+        class="progress" 
+        type="range" 
+        :value="value" 
+        :max ="duration" 
+        min ="0" 
+        step="1" 
+        @input = "changeProcess"
+        @mouseup="mouseup"
+        :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
+        "
       />
+    </a-tooltip>
     <img
       v-if="this.value == 0"
       class="zero"
@@ -75,6 +80,7 @@
         var range = this.$refs.processRange;
         this.$events.emit('changeAllVol',{id:this.id,vol:range.value});
         let compiled = _.template(_.first(this.commandList));
+        console.log(this.value);
         this.compiled = compiled({
           volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
         });
