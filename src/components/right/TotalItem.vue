@@ -14,10 +14,7 @@
       alt="全音"
       @click="vol"
       >
-    <a-tooltip>
-      <template slot='title'>
-        {{value}}%
-      </template>
+    <div :title="title">
       <input
         :id="id"
         ref="processRange"
@@ -32,7 +29,7 @@
         :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
         "
       />
-    </a-tooltip>
+    </div>
     <img
       v-if="this.value == 0"
       class="zero"
@@ -65,6 +62,7 @@
     props:['id','name','value','commandList'],
     data(){
       return{
+        title:this.value+'%',
         duration:'100', //input range总分段
         // 控制静音的显示状态
         muteState:0,
@@ -80,7 +78,6 @@
         var range = this.$refs.processRange;
         this.$events.emit('changeAllVol',{id:this.id,vol:range.value});
         let compiled = _.template(_.first(this.commandList));
-        console.log(this.value);
         this.compiled = compiled({
           volume : _.padStart(_.toUpper(Number(this.value).toString(16)), 2, '0'),
         });
