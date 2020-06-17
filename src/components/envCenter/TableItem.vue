@@ -172,6 +172,7 @@
     width: 50px;
     height: 36px;
     touch-action: none;
+    cursor: pointer !important;
   }
   .ss4,.ss10,.ss16{
     margin-right: calc(100% - 780px);

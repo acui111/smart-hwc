@@ -5,6 +5,7 @@
         :id="volumeMode.id" 
         @click="selectMode(volumeMode.id,volumeMode.name)"
         :class="{active:volumeMode.id == isActive}"
+        style="cursor: pointer"
         >
         <!-- 默认 -->
         <img :src="volumeMode.id == isActive? Src: src" alt="模式">
@@ -94,6 +95,5 @@
   }
   .active{
     background:rgba(18,201,213,1);
-
   }
 </style>

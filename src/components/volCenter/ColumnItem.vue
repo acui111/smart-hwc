@@ -187,6 +187,9 @@
     height: 230px;
     position: relative;
   }
+  .column-item img{
+    cursor: pointer;
+  }
   /deep/ .ant-slider-vertical{
     width: 20px;
     height: 165px;

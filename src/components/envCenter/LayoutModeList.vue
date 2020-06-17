@@ -71,5 +71,6 @@
   .layout-button{
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
   }
 </style>

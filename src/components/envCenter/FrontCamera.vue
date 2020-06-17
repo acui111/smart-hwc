@@ -6,7 +6,7 @@
     alt="前摄像头" 
     @click="switchCamera"
     ref="front-camera"
-    class="draggable"
+    class="front-camera draggable"
     >
   </div>
 </template>
@@ -97,5 +97,8 @@
 </script>
   
 <style scoped>
-  
+  .front-camera{
+    cursor: pointer !important;
+  }
+
 </style>

@@ -99,6 +99,7 @@
           if (!result.successful) {
             this.$message.error(result.message);
           }
+          this.getConfig();
         })
         .catch(error=>{
           this.$message.error(error.response.data.message);
@@ -108,6 +109,21 @@
       // 取消修改
       cancelModeName(){
         this.editModeVisible = false;
+      },
+      // 获取所有配置
+      getConfig(){
+        this.$http.get('/api/configs')
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+          const volumeMode = _.find(result.data.volumeModeList,{id:this.modeId});
+          this.modeName = volumeMode.name;
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       }
     },
     mounted(){

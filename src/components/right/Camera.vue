@@ -679,6 +679,7 @@
     font-size:15px;
     font-family:SimHei;
     position: relative;
+    cursor: pointer;
   }
   .input img{
     position: absolute;
@@ -725,6 +726,7 @@
   .adjust .adjust-button{
     width: 60%;
     position: relative;
+    cursor: pointer;
   }
   .adjust .adjust-button .adjust-direction{
     width:151px;
@@ -784,6 +786,7 @@
   .vol-button img{
     width: 70px;
     height: 30px;
+    cursor: pointer;
   }
   /* 滑动条 */
   .progress{
