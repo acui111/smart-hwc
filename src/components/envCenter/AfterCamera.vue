@@ -6,7 +6,7 @@
       alt="后摄像头" 
       @click="switchCamera"
       ref="after-camera"
-      class="draggable"
+      class="after-camera draggable"
       >
   </div>
 </template>
@@ -95,5 +95,7 @@
 </script>
   
 <style scoped>
-  
+  .rear-camera .after-camera{
+    cursor: pointer !important;
+  }
 </style>

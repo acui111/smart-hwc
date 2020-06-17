@@ -112,8 +112,7 @@ import _ from 'lodash';
           if (!result.successful) {
             this.$message.error(result.message);
           }
-          console.log(this.$editor.columnList);
-          console.log(this.$editor.allVol);
+          this.getConfig();
         })
         .catch(error=>{
           this.$message.error(error.response.data.message);
@@ -187,6 +186,9 @@ import _ from 'lodash';
           if (!result.successful) {
             this.$message.error(result.message);
           }
+          const columnList = _.find(result.data.volumeModeList,{id:this.modeId});
+          this.$editor.allVol = _.first(columnList.volumeList);
+          this.$editor.columnList = columnList.volumeList[1];
         })
         .catch(error=>{
           this.$message.error(error.response.data.message);
@@ -231,6 +233,7 @@ import _ from 'lodash';
   .tab-button img{
     height: 24px;
     margin-left:16px;
+    cursor: pointer;
   }
   .table-button{
     position:absolute;
@@ -247,6 +250,7 @@ import _ from 'lodash';
   .table-button img{
     width: 73px;
     height: 24px;
+    cursor: pointer;
   }
   /* 改变tab的样式 */
   /deep/ .ant-tabs-nav .ant-tabs-tab{

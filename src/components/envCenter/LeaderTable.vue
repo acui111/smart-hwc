@@ -316,5 +316,6 @@
     width: 50px;
     height: 36px;
     touch-action: none;
+    cursor: pointer !important;
   }
 </style>

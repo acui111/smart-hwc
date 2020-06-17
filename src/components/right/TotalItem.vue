@@ -186,6 +186,9 @@
     position: relative;
     overflow: hidden;
   }
+  .total-item img{
+    cursor: pointer;
+  }
   /deep/ .ant-slider-vertical{
     width: 20px;
     height: 165px;
