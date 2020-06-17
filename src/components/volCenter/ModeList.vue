@@ -21,16 +21,54 @@
       return{
         isActive: 0,
         src:'/image/button_pattern.png',
-        Src:'/image/button_pattern_s.png'
+        Src:'/image/button_pattern_s.png',
+        volumeModeList:[],
+        commandList:[],
       }
     },
     methods: {
       selectMode(id,name){
+        this.commandList = [];
         // 切换模式
         this.$events.emit('editButtonShow',{state:1,id,name});
         this.$events.emit('selectedModeId',{id});
         this.isActive = id;
+        const volumeMode = _.find(this.volumeModeList,{id});
+        const volumeList = _.flatten(volumeMode.volumeList);
+        _.forEach(volumeList,(volume)=>{
+          const str = [_.first(volume.commandList)];
+          let compiled = _.template(str);
+          const commandList = compiled({
+            volume : Number(volume.value).toString(16),
+          });
+          this.commandList.push(commandList);
+        })
+        console.log(this.commandList);
+        this.$http.post('/api/controls',{
+          "type": "VOLUME",
+          "action": "SET",
+          "orders": this.commandList
+        })
+        .then(response=>{
+          const result = response.data;
+          if (!result.successful) {
+            this.$message.error(result.message);
+          }
+        })
+        .catch(error=>{
+          this.$message.error(error.response.data.message);
+        })
       },
+    },
+    mounted(){
+      this.$http.get('/api/configs')
+      .then(response=>{
+        const result = response.data;
+        this.volumeModeList = result.data.volumeModeList;
+      })
+      .catch(error=>{
+        this.$message.error(error.response.data.message);
+      })
     }
   }
 </script>
