@@ -1,5 +1,7 @@
 <template>
-  <div class="column-item" :id="id">
+  <div 
+    class="column-item" 
+    >
     <img
       v-if="this.value == 100"
       class="vol"
@@ -14,7 +16,7 @@
       alt="全音"
       @click="vol"
       >
-    <input 
+    <input
       :id="id"
       ref="processRange"
       class="progress" 
@@ -29,6 +31,13 @@
       />
     <img
       v-if="this.value == 0"
+      class="zero"
+      src="/image/icon_mute_s.png" 
+      alt="静音"
+      @click="zero"
+      >
+    <img
+      v-else-if="this.muteStatus == 1"
       class="zero"
       src="/image/icon_mute_s.png" 
       alt="静音"
@@ -51,12 +60,14 @@
     props:['id','name',"value","commandList"],
     data(){
       return{
-        //音量控制范围
+        //音量最大范围
         duration:'100', 
         // 控制静音的显示状态
         muteState:0,
         //控制全音的显示状态
         volState:0,
+        // 点击静音高亮状态
+        muteStatus:0,
         // 指令
         compiled:[],
       }
@@ -66,15 +77,14 @@
       changeProcess(){
         var range = this.$refs.processRange;
         this.$events.emit('changeVol',{id:this.id,vol:range.value});
-        let compiled = _.template(this.commandList);
+        let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
           volume : Number(this.value).toString(16),
         });
-        // console.log(this.compiled);
         this.$http.post('/api/controls',{
           "type": "VOLUME",
           "action": "SET",
-          "orders": this.compiled
+          "orders": [this.compiled]
         })
         .then(response=>{
           const result = response.data;
@@ -92,10 +102,58 @@
       },
       //静音
       zero(){
-        this.$events.emit('changeVol',{id:this.id,vol:0});
+        // 当前静音状态
+        if (this.muteStatus == 1) {
+          // 发送取消静音的指令
+          let compiled = _.template(this.commandList[2]);
+          this.compiled = compiled({
+            volume : Number(this.value).toString(16),
+          });
+          console.log(this.compiled);
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+            this.muteStatus = 0;
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
+        // 不是静音状态
+        else{
+          // 发送静音的指令
+          let compiled = _.template(this.commandList[1]);
+          this.compiled = compiled({
+            volume : Number(this.value).toString(16),
+          });
+          console.log(this.compiled);
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+            this.muteStatus = 1;
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
       },
     },
     mounted(){
+      console.log('=====',this.muteStatus);
       if (this.value == 100) {
         this.volState = 1 ;
       }else if(this.value == 0){

@@ -171,7 +171,6 @@ import _ from 'lodash';
         this.editButtonShow = state;
         this.modeId = id;
         this.modeName = name;
-        console.log(this.modeName);
       })
     }
   }

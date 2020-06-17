@@ -63,7 +63,7 @@
       changeProcess(){
         var range = this.$refs.processRange;
         this.$events.emit('changeAllVol',{id:this.id,vol:range.value});
-        let compiled = _.template(this.commandList);
+        let compiled = _.template(_.first(this.commandList));
         this.compiled = compiled({
           volume : Number(this.value).toString(16),
         });
@@ -71,7 +71,7 @@
         this.$http.post('/api/controls',{
           "type": "VOLUME",
           "action": "SET",
-          "orders": this.compiled
+          "orders": [this.compiled]
         })
         .then(response=>{
           const result = response.data;
@@ -89,7 +89,54 @@
       },
       //静音
       zero(){
-        this.$events.emit('changeAllVol',{id:this.id,vol:0});
+        // 当前静音状态
+        if (this.value == 0) {
+          // 发送取消静音的指令
+          let compiled = _.template(this.commandList[2]);
+          this.compiled = compiled({
+            volume : Number(this.value).toString(16),
+          });
+          console.log(this.compiled);
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+            this.$events.emit('changeAllVol',{id:this.id,vol:50});
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
+        // 不是静音状态
+        else{
+          // 发送静音的指令
+          let compiled = _.template(this.commandList[1]);
+          this.compiled = compiled({
+            volume : Number(this.value).toString(16),
+          });
+          console.log(this.compiled);
+          this.$http.post('/api/controls',{
+            "type": "VOLUME",
+            "action": "SET",
+            "orders": [this.compiled]
+          })
+          .then(response=>{
+            const result = response.data;
+            if (!result.successful) {
+              this.$message.error(result.message);
+            }
+            this.$events.emit('changeAllVol',{id:this.id,vol:0});
+          })
+          .catch(error=>{
+            this.$message.error(error.response.data.message);
+          })
+        }
       },
     },
     mounted(){
