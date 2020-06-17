@@ -135,8 +135,8 @@ import _ from 'lodash';
         })
         .then(response=>{
           const result = response.data;
-          if (result.successful) {
-            this.$message.success(result.message);
+          if (!result.successful) {
+            this.$message.error(result.message);
           }
         })
         .catch(error=>{
@@ -156,8 +156,8 @@ import _ from 'lodash';
         })
         .then(response=>{
           const result = response.data;
-          if (result.successful) {
-            this.$message.success(result.message);
+          if (!result.successful) {
+            this.$message.error(result.message);
           }
         })
         .catch(error=>{

@@ -49,9 +49,7 @@ import VolTable from './VolTable';
         })
         .then(response=>{
           const result = response.data;
-          if (result.successful) {
-            this.$message.success(result.message);
-          }else{
+          if (!result.successful) {
             this.$message.error(result.message);
           }
         })

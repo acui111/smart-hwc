@@ -23,7 +23,6 @@
     data(){
       return{
         modeId:1,
-        compiled:"",
       }
     },
     components:{
