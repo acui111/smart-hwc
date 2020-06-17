@@ -16,10 +16,7 @@
       alt="全音"
       @click="vol"
       >
-    <a-tooltip>
-      <template slot='title'>
-        {{value}}%
-      </template>
+    <div :title="title">
       <input
         :id="id"
         ref="processRange"
@@ -34,6 +31,7 @@
         :style="{background: '-webkit-linear-gradient(top, rgba(12, 179, 185, 1), rgba(97, 250, 255, 1)) 0% 0% / '+ value*100/duration +'% 100% no-repeat'}
         "
         />
+      </div>
     </a-tooltip>
     <img
       v-if="this.value == 0"
@@ -67,6 +65,7 @@
     props:['id','name',"value","commandList"],
     data(){
       return{
+        title:this.value+'%',
         //音量最大范围
         duration:'100', 
         // 控制静音的显示状态

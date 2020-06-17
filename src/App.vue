@@ -14,7 +14,7 @@ export default {
       this.$editor.configs = result.data;
     })
     .catch(error=>{
-      console.log('请求失败');
+      console.log(err.response.data.message);
     })
   }
 }
