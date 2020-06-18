@@ -2,13 +2,17 @@
   <div id="layout-mode-list">
     <div class="layout-button">
       <template v-for="scene in sceneList">
-        <img
-          @click="selectedMode(scene.id,scene.commandList)" 
-          id="scene.id"
-          class="layout-name" 
-          :src="'/image/envImg/screen'+`${scene.id}`+'.png'" 
-          alt="大屏"
-          />
+        <div
+          :id="scene.id"
+          @click="selectedMode(scene.id,scene.commandList)"
+          style="cursor: pointer"
+          >
+          <img
+            :src="scene.id == isActive? Src: src"
+            alt="大屏"
+            />
+          <p class="screen-name">{{scene.name}}</p>
+        </div>
       </template>
     </div>
     <template v-for="(layout,index) in sceneList">
@@ -26,6 +30,9 @@
   export default {
     data(){
       return{
+        isActive: 1,
+        src:'/image/button_pattern.png',
+        Src:'/image/button_pattern_s.png',
         sceneList:[],
         screenListId:null,
       }
@@ -35,6 +42,7 @@
     },
     methods:{
       selectedMode(modeId,commandList){
+        this.isActive = modeId;
         this.$events.emit('selectedMode',({id:modeId}));
         this.$http.post('/api/controls',{
           "type": "DISPLAY",
@@ -69,8 +77,24 @@
 
 <style>
   .layout-button{
+    height: 30px;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+  }
+  .layout-button img{
+    width: 86px;
+    height: 30px;
+  }
+  .screen-name{
+    width: 50px;
+    margin: 0px;
+    font-size:14px;
+    font-family:SimHei;
+    color:rgba(229,248,255,1);
+    position: relative;
+    left: 50%;
+    top: -80%;
+    margin-left: -21px;
   }
 </style>

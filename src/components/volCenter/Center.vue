@@ -12,12 +12,18 @@
           <img v-if="environment == 0" src="/image/environment.png" alt="环境控制">
           <img v-else-if="environment == 1" src="/image/environment_s.png" alt="环境控制">
         </span>
-
-
-
         <div class="table-button">
-          <img style="margin-left:16px" src="/image/envImg/open.png" alt="大屏开" @click="screenOpen">
-          <img style="margin:0 20px 0 33px" src="/image/envImg/close.png" alt="大屏关" @click="screenClose">
+          <img 
+            style="margin-left:16px"
+            :src="openStatus? OpenSrc : openSrc"
+            alt="大屏开" 
+            @click="screenOpen"
+          >
+          <img 
+            style="margin:0 20px 0 33px" 
+            :src="closeStatus? CloseSrc : closeSrc" 
+            alt="大屏关" 
+            @click="screenClose">
         </div>
 
         <!-- 屏幕设备 -->
@@ -72,6 +78,14 @@ import _ from 'lodash';
     },
     data(){
       return{
+        // 大屏开
+        openSrc:'/image/envImg/open.png',
+        OpenSrc:'/image/envImg/open_s.png',
+        openStatus:false,
+        // 大屏关
+        closeSrc:'/image/envImg/close.png',
+        CloseSrc:'/image/envImg/close_s.png',
+        closeStatus:false,
         // tab环境控制
         environment:1,
         // tab音频控制
@@ -125,6 +139,8 @@ import _ from 'lodash';
       },
       // 大屏开
       screenOpen(){
+        this.openStatus = true;
+        this.closeStatus = false;
         const screenList = _.first(this.$editor.configs.screenList);
         const first = _.first(screenList.commandList);
         this.$http.post('/api/controls',{
@@ -146,6 +162,8 @@ import _ from 'lodash';
       },
       // 大屏关
       screenClose(){
+        this.closeStatus = true;
+        this.openStatus = false;
         let _this = this;
         _this.$confirm({
           title: '大屏即将关闭，是否继续',

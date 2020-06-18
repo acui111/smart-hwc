@@ -17,7 +17,8 @@
       @click="vol"
       >
     <a-slider 
-      vertical 
+      vertical
+      :disabled = "muteStatus" 
       :default-value='value'
       @change = 'changeProcess'
       @afterChange = 'mouseup'
@@ -30,7 +31,7 @@
       @click="zero"
       >
     <img
-      v-else-if="this.muteStatus == 1"
+      v-else-if="this.muteStatus"
       class="zero"
       src="/image/icon_mute_s.png" 
       alt="静音"
@@ -61,7 +62,7 @@
         //控制全音的显示状态
         volState:0,
         // 点击静音高亮状态
-        muteStatus:0,
+        muteStatus:false,
         // 指令
         compiled:[],
       }
@@ -122,7 +123,7 @@
       //静音
       zero(){
         // 当前静音状态
-        if (this.muteStatus == 1) {
+        if (this.muteStatus) {
           // 发送取消静音的指令
           let compiled = _.template(this.commandList[2]);
           this.compiled = compiled({
@@ -139,7 +140,7 @@
             if (!result.successful) {
               this.$message.error(result.message);
             }
-            this.muteStatus = 0;
+            this.muteStatus = false;
           })
           .catch(error=>{
             this.$message.error(error.response.data.message);
@@ -163,7 +164,7 @@
             if (!result.successful) {
               this.$message.error(result.message);
             }
-            this.muteStatus = 1;
+            this.muteStatus = true;
           })
           .catch(error=>{
             this.$message.error(error.response.data.message);
@@ -186,12 +187,14 @@
     width: 87px;
     height: 230px;
     position: relative;
+    text-align: center;
   }
   .column-item img{
     cursor: pointer;
   }
+  /* 滑动条的大小与位置 */
   /deep/ .ant-slider-vertical{
-    width: 20px;
+    width: 6px;
     height: 165px;
     padding:0;
     margin:0;
@@ -201,21 +204,20 @@
     margin-left: -3px;
     margin-top: -84px;
   }
+  /* 滑槽 */
   /deep/ .ant-slider-vertical .ant-slider-rail{
     width: 6px;
     height: 100%;
   }
+  /* 滑槽的背景颜色 */
   /deep/ .ant-slider-rail{
     background-color:rgba(0,0,0,0.1);
   }
+  /* 滑槽移入的背景颜色 */
   /deep/ .ant-slider:hover .ant-slider-rail{
     background-color:rgba(0,0,0,0.1);
   }
-  /deep/ .ant-slider-vertical .ant-slider-step{
-    width: 6px;
-    height: 100%;
-  }
-  
+  /* 滑块 */
   /deep/ .ant-slider-handle{
     width: 16px;
     height: 24px;
@@ -225,11 +227,29 @@
     border:none;
     background-color: rgba(255,255,255,0);
   }
+  /* 禁止滑动后滑块的样式 */
+  /deep/ .ant-slider-disabled .ant-slider-handle, .ant-slider-disabled .ant-slider-dot{
+    background-color: rgba(255,255,255,0);
+    border-color: rgba(255,255,255,0) !important;
+  }
+  /* 选中音柱的宽度 */
   /deep/ .ant-slider-vertical .ant-slider-track{
     width: 6px;
   }
+  /* 选中音柱的颜色 */
   /deep/ .ant-slider-track{
     background-color:rgb(12, 179, 185);
+  }
+  /* 禁止滑动后音柱的颜色 */
+  /deep/ .ant-slider-disabled .ant-slider-track{
+    background-color:rgb(12, 179, 185) !important;
+  }
+  /* 刻度标记 */
+  /deep/ .ant-slider-vertical .ant-slider-mark{
+    top: 0;
+    left: 0;
+    width: 0px;
+    height: 0px;
   }
   /* 全音 */
   .vol{
@@ -256,7 +276,6 @@
     margin: 0;
     position: relative;
     color:#ffffff;
-    left: 32%;
     top: 100%;
   }
 </style>
